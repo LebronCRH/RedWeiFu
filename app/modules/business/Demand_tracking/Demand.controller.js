@@ -6,14 +6,24 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
   $scope.StatusList=["全部","登记","沟通中","确认","完成","挂起"];
   $scope.SelectSource=0;//来源的选择
   $scope.SelectArea=null;//地区的选择
-  $scope.StarTime="";//起始时间
-  $scope.EndTime="";//截止时间
+  $scope.Data={
+    StarTime:"2018-04-09",//起始时间
+    EndTime:"2018-04-16",//截止时间
+  };
+  $scope.StarTime="2018-04-09";//起始时间
+  $scope.EndTime="2018-04-16";//截止时间
   $scope.SelectHosital="";//医院的选择
   $scope.SelectZDR="";//指导人的输入
   $scope.SelectStatus=[];//状态的选择;
   $scope.CurrentScreen=0;//显示4个筛选模态界面的状态值
   $scope.CurrentSelectHospital=null;//当前勾选的医院项
   $scope.model=false;
+  new Mdate("dateSelectorStart", {
+    format: "-"
+});
+  new Mdate("dateSelectorEnd", {
+    format: "-"
+});
   $scope.TaggleModel=function(){
     $scope.model=!$scope.model;
   }
@@ -112,6 +122,7 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
     // console.log(response.listUnit);
   })//初始化获得所有医院的数据
   $scope.SubmitSerach=function(){//提交查询函数的操作
+    console.log($("#dateSelectorStart").val());
     var Status=$scope.SelectStatus.join(",");
     var Area="";
     if($scope.CurrentSelectHospital!=null)
@@ -126,7 +137,7 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
     {
       Area=$scope.AareaList[$scope.SelectArea];
     };
-    DemandService.GetDemandBySerach($scope.SourceList[$scope.SelectSource],$scope.StarTime,$scope.EndTime,$scope.SelectHosital,$scope.SelectZDR,Area,Status).then(response=>{
+    DemandService.GetDemandBySerach($scope.SourceList[$scope.SelectSource],$("#dateSelectorStart").val(),$("#dateSelectorEnd").val(),$scope.SelectHosital,$scope.SelectZDR,Area,Status).then(response=>{
       $scope.DemandList=response;
       console.log(response);
     });

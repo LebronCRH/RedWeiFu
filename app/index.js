@@ -3,6 +3,7 @@ var ionic = require('./assets/lib/ionic/release/js/ionic.bundle.min');
 const bussiness = require('./modules/business');
 require('./assets/styles/ionic.min.css');
 require('./assets/styles/animate.css');
+require('./assets/styles/Mdate.css');
 require('./assets/lib/calendar-pk/release/css/calendar_pk.min.css');
 require('./assets/lib/ionic-filter-bar/release/ionic.filter.bar.min.css');
 //把所有less样式文件引入

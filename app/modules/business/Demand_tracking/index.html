@@ -33,28 +33,22 @@
              </li>             
       </ul>
 
-      <ul class="SortSelect FourMenu" ng-show="CurrentScreen==3">
-             <li class="SortItem">
-                <span class="CurrentSort">全部</span>
-                <img src="../../../images/yes.png">
-             </li>             
-             <li class="SortItem">
-                <span class="CurrentSort">实施工程师</span>
-                <img src="../../../images/yes.png">
-             </li>             
-             <li class="SortItem">
-                <span class="CurrentSort">销售</span>
-                <img src="../../../images/yes.png">
-             </li>
-             <li class="SortItem">
-                <span class="CurrentSort">部门经理</span>
-                <img src="../../../images/yes.png">
-             </li>             
-             <li class="SortItem">
-                <span class="CurrentSort">研发工程师</span>
-                <img src="../../../images/yes.png">
-             </li>
-      </ul>
+      <div class="SortSelect FourMenu" ng-show="CurrentScreen==3">
+           <ul class="projectItem">
+                <li class="LiProjectItem">
+                <p class="Title">起始时间</p>
+                <div class="Content">
+                <input type="text" id="dateSelectorStart" ng-model="Data.StarTime" class="textContent">
+                </div>
+                </li>
+                <li class="LiProjectItem">
+                <p class="Title">截止时间</p>
+                <div class="Content">
+                <input type="text" id="dateSelectorEnd" ng-model="Data.EndTime" class="textContent" ng-model="SerachHospital">
+                </div>
+                </li>
+              </ul>
+      </div>
 
       <div class="FourMenu BigCharactSelect" ng-show="CurrentScreen==4">
         <div class="CharactSelect">
@@ -101,7 +95,7 @@
                 <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" on-refresh="doRefresh()"></ion-refresher>
 <ul class="ul_Demand">
   <li class="li_DemandItem" ng-repeat="Item in DemandList" ui-sref="DemandDetails({id:Item.Id})">
-    <p class="Title">{{Item.ReqTitle}}</p>
+    <p class="Title">{{Item.ReqTitle|limitTo:14}}…</p>
     <p class="HospitalName"><span>{{Item.ReqHospital}}</span><span>{{Item.ReqTime}}</span></p>
     <p class="Content">{{Item.ReqContent|limitTo:20}}…</p>
   </li>
