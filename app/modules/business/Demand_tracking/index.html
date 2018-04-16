@@ -1,0 +1,117 @@
+<ion-pane>
+<ion-header-bar style="z-index: 99;">
+<div app-page-head></div>
+</ion-header-bar>
+<!-- <ion-content style="top:1.5rem;">
+                <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" on-refresh="doRefresh()"></ion-refresher> -->
+<div class="PetShopScreen">
+     <ul class="ul_Screen">
+        <li class="ScreenItem" ng-class="CurrentScreen==1?'active':''" ng-click="ChangeSelectScreen(1)">
+          <span>来源 <i></i></span>
+        </li>
+        <li class="ScreenItem" ng-class="CurrentScreen==2?'active':''" ng-click="ChangeSelectScreen(2)">
+                <span>地区 <i></i></span>
+        </li>
+        <li class="ScreenItem ScreenSort" ng-class="CurrentScreen==3?'active':''" ng-click="ChangeSelectScreen(3)">
+                <span>登记日期 <i></i></span>
+        </li>
+        <li class="ScreenItem" ng-class="CurrentScreen==4?'active':''" ng-click="ChangeSelectScreen(4)">
+                <span>筛选 <i></i></span>
+        </li>
+     </ul>
+      <ul class="SortSelect FourMenu SourceSelect" ng-show="CurrentScreen==1"">
+             <li class="SortItem" ng-repeat="(Index,Item) in SourceList" ng-click="ChangeSource(Index)">
+                <span class="CurrentSort">{{Item}}</span>
+                <img src="../../../images/yes.png" ng-show="SelectSource==Index">
+             </li>             
+      </ul>
+
+      <ul class="SortSelect FourMenu AreaSelect" ng-show="CurrentScreen==2">
+             <li class="SortItem" ng-repeat="(Index,Item) in AareaList" ng-click="ChangeArea(Index)">
+                <span class="CurrentSort">{{Item}}</span>
+                <img src="../../../images/yes.png" ng-show="SelectArea==Index">
+             </li>             
+      </ul>
+
+      <ul class="SortSelect FourMenu" ng-show="CurrentScreen==3">
+             <li class="SortItem">
+                <span class="CurrentSort">全部</span>
+                <img src="../../../images/yes.png">
+             </li>             
+             <li class="SortItem">
+                <span class="CurrentSort">实施工程师</span>
+                <img src="../../../images/yes.png">
+             </li>             
+             <li class="SortItem">
+                <span class="CurrentSort">销售</span>
+                <img src="../../../images/yes.png">
+             </li>
+             <li class="SortItem">
+                <span class="CurrentSort">部门经理</span>
+                <img src="../../../images/yes.png">
+             </li>             
+             <li class="SortItem">
+                <span class="CurrentSort">研发工程师</span>
+                <img src="../../../images/yes.png">
+             </li>
+      </ul>
+
+      <div class="FourMenu BigCharactSelect" ng-show="CurrentScreen==4">
+        <div class="CharactSelect">
+           <p class="CharacgTitle">状态选择</p>
+           <ul class="ul_Special">
+              <li class="specialItem" id="StateSleectAll" data-type="0" ng-repeat="(Index,Item) in StatusList" ng-click="ChangeStatus(Index)" ng-class="IsArray(Item)?'active':''">
+              <span>{{Item}}</span>
+              </li>
+           </ul>
+           <ul class="projectItem">
+                <li class="LiProjectItem">
+                <p class="Title">指定人</p>
+                <div class="Content">
+                <input type="text" class="textContent">
+                </div>
+                </li>
+                <li class="LiProjectItem">
+                <p class="Title">医院名</p>
+                <div class="Content">
+                <input type="text" class="textContent" ng-model="SerachHospital">
+                </div>
+                </li>
+              </ul>
+           <p class="CharacgTitle">医院选择</p>
+           <ul class="ul_Discount ul_Hospital">
+              <li class="DiscountItem HospitalItem" ng-repeat="Item in HospitalList |filter:SerachHospital" ng-click="ChangeHospital(Item)">
+                <img class="ItemImg" src="../../../images/hospital.png">
+                <span class="ItemContent">{{Item.UnitName}}</span>
+                <img class="ItemYes" ng-show="CurrentSelectHospital.Id==Item.Id" src="../../../images/yes.png">
+              </li>
+           </ul>
+        </div>
+        <div class="SelectEdit">
+              <div class="EditClear">
+                  清空
+              </div>
+              <div class="EditSubmit" ng-click="SubmitSerach()">
+                确定
+              </div>
+        </div>
+      </div>
+</div>
+<ion-content style="top:2.65rem;background:#f3f3f3;">
+                <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" on-refresh="doRefresh()"></ion-refresher>
+<ul class="ul_Demand">
+  <li class="li_DemandItem" ng-repeat="Item in DemandList" ui-sref="DemandDetails({id:Item.Id})">
+    <p class="Title">{{Item.ReqTitle}}</p>
+    <p class="HospitalName"><span>{{Item.ReqHospital}}</span><span>{{Item.ReqTime}}</span></p>
+    <p class="Content">{{Item.ReqContent|limitTo:20}}…</p>
+  </li>
+</ul>
+
+ <ion-infinite-scroll  
+     ng-if="hasData"  
+    icon="ion-loading-c"  
+    on-infinite="loadMore()">  
+  </ion-infinite-scroll> 
+</ion-content>
+<div class="shadow" ng-show="model" ng-click="ModelChose()" style="position: absolute;left: 0rem;right: 0rem;bottom:0rem;top: 1.15rem;background-color: rgba(0, 0, 0, 0.7);"></div>
+</ion-pane>

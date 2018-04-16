@@ -1,0 +1,120 @@
+<ion-pane>
+<ion-header-bar>
+<div app-page-head title="title"></div>
+</ion-header-bar>
+   <ion-content style="top:1.5rem;">
+                <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" on-refresh="doRefresh()"></ion-refresher>
+                <div class="Weekly">
+  <div class="TopTitle">
+       <span ng-click="TaggleModel()">周报</span>
+    <div class="swiper-container" id="nav">
+    <div class="swiper-wrapper">
+<!--       <div class="swiper-slide" ng-repeat="Item in Week">
+        <span>{{Item.Day}}</span></div> -->
+      <div class="swiper-slide">
+        <span>{{Week[0].NoteDate|limitTo:5:5}}</span></div>
+      <div class="swiper-slide">
+        <span>{{Week[1].NoteDate|limitTo:5:5}}</span></div>
+      <div class="swiper-slide">
+        <span>{{Week[2].NoteDate|limitTo:5:5}}</span></div>
+      <div class="swiper-slide">
+        <span>{{Week[3].NoteDate|limitTo:5:5}}</span></div>
+      <div class="swiper-slide">
+        <span>{{Week[4].NoteDate|limitTo:5:5}}</span></div>
+      <div class="swiper-slide">
+        <span>{{Week[5].NoteDate|limitTo:5:5}}</span></div>
+      <div class="swiper-slide">
+        <span>{{Week[6].NoteDate|limitTo:5:5}}</span></div>
+      <div class="bar">
+        <div class="color"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="swiper-container" id="page">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide slidepage" ng-repeat="Item in Week">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">
+            <ul class="projectItem">
+              <li class="LiProjectItem">
+              <p class="Title">记录</p>
+              <div class="Content" ng-click="OpenRecordEditInput()">
+              <input type="text" class="textContent" ng-model="Item.Note" disabled="disabled">
+              </div>
+              </li>
+              <li class="LiProjectItem">
+              <p class="Title">去向</p>
+              <div class="Content" ng-click="OpenWhereaboutsEditInput()">
+              <input type="text" class="textContent" ng-model="Item.location" disabled="disabled">
+              </div>
+              </li>
+              <li class="LiProjectItem">
+              <p class="Title">备注</p>
+              <div class="Content" ng-click="OpenRemarksEditInput()">
+              <input type="text" class="textContent" ng-model="Item.Remarks" disabled="disabled">
+              </div>
+              </li>
+              <li class="LiProjectItem">
+              <p class="Title">相关项目</p>
+              <div class="Content" ng-click="OpenProjectEditInput()">
+              <input type="text" class="textContent" ng-model="Item.workingload" disabled="disabled">
+              </div>
+              </li>
+              <li class="LiProjectItem">
+              <p class="Title">出勤</p>
+              <div class="Content" ng-click="OpenAttendanceEditInput()">
+              <input type="text" class="textContent" ng-model="Item.attendance" disabled="disabled">
+              </div>
+              </li>
+              <li class="LiProjectItem">
+              <div class="Preservation" ng-click="SubmitWeeklyItem(Item)">保存</div>
+              </li>
+            </ul>
+          </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="SummaryOrPlan">
+            <img src="../../../images/PreservationOrPlan.png" alt="">
+            </div>
+            <div class="line" style="width: 100%;height: 2px;"></div>
+            <ul class="projectItem">
+              <li class="LiProjectItem">
+              <p class="Title">本周总结</p>
+              <div class="Content" ng-click="OpenSummaryEditInput()">
+              <input type="text" class="textContent" ng-model="SummaryOrPlan.Summary" disabled="disabled">
+              </div>
+              </li>
+              <li class="LiProjectItem">
+              <p class="Title">下周计划</p>
+              <div class="Content" ng-click="OpenPlanEditInput()">
+              <input type="text" class="textContent" ng-model="SummaryOrPlan.Plan" disabled="disabled">
+              </div>
+              </li>
+              <li class="LiProjectItem">
+              <p class="Title">审核意见</p>
+              <div class="Content">
+              <input type="text" class="textContent">
+              </div>
+              </li>
+              <li class="LiProjectItem">
+              <p class="Title">审核标志</p>
+              <div class="Content">
+              <input type="text" class="textContent">
+              </div>
+              </li>
+            </ul>
+
+            <div class="AllPreservation" ng-click="SubmitAllData()">保存</div>
+</div>
+ <ion-infinite-scroll  
+     ng-if="hasData"  
+    icon="ion-loading-c"  
+    on-infinite="loadMore()">  
+  </ion-infinite-scroll> 
+</ion-content>
+  <div app-edit-input modal="modal" taggle-model="TaggleModel()" current-object-day-state="CurrentObjectDayState" complete-edit="CompleteEdit"></div>
+</ion-pane>

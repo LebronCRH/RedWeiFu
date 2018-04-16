@@ -1,0 +1,118 @@
+<ion-pane>
+<ion-header-bar>
+<div app-page-head title="title"></div>
+</ion-header-bar>
+<ion-content style="top:1.5rem;">
+
+<div class="Add_Demand">
+    <div class="Top">
+        <div class="DemandTitle DemandItem">
+            <p class="Title">标题:</p>   
+            <div class="Content">
+            <input type="text" ng-model="Obj.ReqTitle" placeholder="需求标题……">
+            </div> 
+        </div>
+        <div class="DemandContent">
+            <p class="Title">内容:</p>
+            <div class="Content">
+             <textarea name="" id="" cols="30" rows="10" ng-model="Obj.ReqContent">
+
+             </textarea>
+            </div> 
+        </div>
+        <div class="DemandNamed DemandItem">
+            <p class="Title">项目名称:</p>
+            <div class="Content">
+            <input type="text" ng-model="Obj.ReqServiceName" placeholder="项目名称……">
+            </div> 
+        </div>
+        <div class="DemandFile DemandItem">
+            <p class="Title">附件:</p>
+            <div class="Content" style="display: flex;align-items: center;">
+            <a href="javascript:;" class="upload"><span id="FileName">选择文件</span>
+            <input class="change" id="SelectFile" type="file" multiple="multiple" />
+            </a>
+            </div> 
+        </div>
+    </div>
+
+    <div class="Middle">
+        <div class="DemandOrderNo DemandItem">
+            <p class="Title">维服单号:</p>   
+            <div class="Content">
+            <input type="text" ng-model="Obj.ReqServiceId" placeholder="请输入维服单号……">
+            </div> 
+        </div>
+        <div class="DemandHospital DemandItem">
+            <p class="Title">医院:</p>
+            <div class="Content" ng-click="TaggleHospital()">
+            <input type="text" disabled="display" ng-model="Obj.ReqHospital" placeholder="选择医院……">
+            </div> 
+            <div class="Right">
+            <img src="../../../images/right_.png" alt="">
+            </div>
+        </div>
+        <div class="DemandExecutor DemandItem">
+            <p class="Title">执行人:</p>
+            <div class="Content" ng-click="TaggleExecutor()">
+            <input type="text" disabled="display" ng-model="Obj.ReqAssignDev" placeholder="指定执行人……">
+            </div> 
+            <div class="Right">
+            <img src="../../../images/right_.png" alt="">
+            </div>
+        </div>
+        <div class="DemandTime DemandItem">
+            <p class="Title">登记时间:</p>
+            <div class="Content">
+            <input type="text" ng-model="Obj.ReqTime" disabled="disabled" placeholder="选择登记时间……">
+            </div> 
+            <div class="Right">
+            <img src="../../../images/right_.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="Bottom">
+          <div class="SelectEdit">
+                <div class="EditClear">
+                  返回
+                </div>
+                <div class="EditSubmit" ng-click="save()">
+                  确定
+                </div>
+             </div>
+    </div>
+
+<!--     <div class="shadow" ng-show="ModelZzhe==true" ng-click="TaggleModel()" style="position: absolute;left: 0rem;right: 0rem;bottom:0rem;top:0rem;background-color: rgba(0, 0, 0, 0.7);"></div>
+    <div class="HospitalSelect FourMenu SourceSelect" ng-show="ShowHositalModel">
+            <div class="ps_serach">
+               <div class="ps_divserach">
+               <input type="text" ng-model="SerachName" name="serachName">
+               <img src="../../../images/serach2.png">
+               </div>
+            </div>
+            <ul>
+                 <li class="SortItem" ng-repeat="Item in Hospital |filter:SerachName" ng-click="HospitalChange(Item)">
+                    <span class="CurrentSort">{{Item.UnitName}}</span>
+                    <img src="../../../images/yes.png" style="display:none;">
+                 </li>             
+             </ul>
+    </div>
+    <div class="ExecutorSelect FourMenu SourceSelect" ng-show="ShowExecutorModel">
+            <div class="ps_serach">
+               <div class="ps_divserach">
+               <input type="text" ng-model="SerachName" name="serachName">
+               <img src="../../../images/serach2.png">
+               </div>
+            </div>
+            <ul>
+                 <li class="SortItem" ng-repeat="Item in Executor" ng-click="ExecutorChange(Item)">
+                    <span class="CurrentSort">{{Item.UserName}}</span>
+                    <img src="../../../images/yes.png" style="display:none;">
+                 </li>                
+             </ul>
+    </div> -->
+</div>
+
+</ion-content>
+</ion-pane>

@@ -1,0 +1,367 @@
+/*引导页样式*/
+  .guide{width:100%;height:100vh !important;background:url(../images/guide2.jpg);
+  	img{width:100%;height:100vh !important;}
+  }
+  .Weekly{
+        	width: 10rem;padding:0.2rem 0.3rem;box-sizing: border-box;
+        .TopTitle{
+        	width:100%;height: 1rem;border-bottom: solid 1px rgba(0,0,0,0.1);display:flex;align-items: center;
+        	span{line-height:1rem;font-size: 0.55rem;color:blcak;width: 1.4rem;}
+        }
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+  .gallery-thumbs {
+      height: 1rem;position:relative;width: 8rem;overflow:auto;
+  }
+  #nav{height: 1.2rem;}
+  .projectItem{
+      width:100%;list-style:none;padding: 0rem;margin: 0rem;
+      .LiProjectItem{
+          width:100%;height:1.2rem;display:flex;align-items:center;margin-bottom: 1px;
+          .Title{
+          line-height:1.2rem;font-size: 0.4rem;width: 2.1rem;height: 1.2rem;text-align: center;;
+        }
+        .Content{
+          height:1.2rem;width:7.5rem;padding: 0.1rem;background: #f3f3f3;box-sizing:border-box;
+          .textContent{border: none;padding:0rem;margin:0rem;width:100%;height:100%;}
+        }
+        .Preservation{height: 1.2rem;width: 100%;background: #38dbb0;color: white;display: flex;align-items: center;justify-content: center;margin-top: 0.2rem;}
+        }
+  }
+  .SummaryOrPlan{
+          width: 100%;margin: 0rem;padding: 0rem;overflow: hidden;height: 1.4rem;display: flex;align-items: center;justify-content: center;
+          img{
+          display: block;height:1.2rem;
+        }
+        }
+  .SummaryOrPlanItem{width: 100%;display: flex;justify-content: center;margin: 0.1rem 0rem;
+       .Title{width: 2.1rem;height: 1.2rem;font-size: 0.4rem;text-align: center;line-height: 1.2rem;}
+  }
+  .AllPreservation{height: 1.2rem;width: 100%;background: #38dbb0;color: white;display: flex;align-items: center;justify-content: center;margin-top: 0.2rem;font-size: 0.5rem;}
+
+//需求跟踪的首页面开始
+  .PetShopScreen{
+        width:100%;height:1.14rem;position:relative;background:#fff;margin-top:1.5rem;z-index:10;
+        .ul_Screen{width:100%;height:100%;list-style:none;display:flex;align-items:center;justify-content:center;z-index:100;
+          .ScreenItem{width:25%;height:center;display:flex;justify-content:center;align-items:center;position:relative;
+            span{line-height:1rem;font-size:0.43rem;padding:0rem 0.1rem 0rem 0.15rem;border-bottom:solid 0.1rem  #fff;box-sizing:border-box;
+              i{display:inline-block;background:url(../images/sjDown.png) center center no-repeat;background-size:0.3rem 0.3rem;width:0.3rem;height:0.3rem;}
+              i.active{display:inline-block;background:url(../images/sjTop.png) center center no-repeat;background-size:0.3rem 0.3rem;width:0.3rem;height:0.3rem;}
+            }
+          }
+          .ScreenItem.active span{
+              line-height:1rem;font-size:0.43rem;color:#f44236;padding:0rem 0.1rem 0rem 0.15rem;border-bottom:solid 0.1rem #f44236;box-sizing:border-box;    
+              i{display:inline-block;background:url(../images/sjTop.png) center center no-repeat;background-size:0.3rem 0.3rem;width:0.3rem;height:0.3rem;}
+            }
+        }
+  }
+  .SortSelect{
+      width:100%;position:absolute;left:0rem;top:1.1rem;list-style:none;background:#fff;z-index:99;padding-bottom:0.5rem;max-height:12.7rem;overflow-y:auto;
+      .SortItem{width:100%;height:1.28rem;margin-top:1px;background:#fff;padding-left:0.8rem;display:flex;align-items:center;
+        span{line-height:1.28rem;font-size:0.357rem;width:8rem;}
+        span.active{color:#f44236;}
+        img{width:0.42rem;height:0.42rem;}
+      }
+  }
+  .BigCharactSelect{width:10rem;position:absolute;left:0rem;top:1.1rem;background:#f2f3f4;height:12.7rem;z-index:99;width: 100%;
+    .CharactSelect{
+            width:10rem;background:#f2f3f4;height:11rem;z-index:99;overflow-y:auto;
+            .CharacgTitle{
+              width:10rem;height:0.8rem;line-height:0.8rem;font-size:0.38rem;margin:0rem;padding:0rem 0.3rem;box-sizing: border-box;
+            }
+            .ul_Special{
+              width:10rem;background:#fff;list-style:none;overflow:hidden;padding:0.12rem 0rem;
+              .specialItem{
+                width:2.83rem;float:left;height:1.2rem;display:flex;align-items:center;justify-content:center;margin:0.12rem 0.25rem;border:solid 0.02rem #bbbbbb;border-radius:0.1rem;padding:0rem 0.3rem;box-sizing: border-box;
+                span{font-size:0.36rem;text-align:center;color:#bbbbbb;
+                }
+                &.active{width:2.83rem;float:left;height:1.2rem;display:flex;align-items:center;justify-content:center;margin:0.12rem 0.25rem;border:solid 0.02rem #f44236;border-radius:0.1rem;padding:0rem 0.3rem;box-sizing: border-box;
+                    span{font-size:0.36rem;text-align:center;color:#f44236;}
+                  }
+              }
+            }
+            .ul_Discount{
+              width:10rem;background:#fff;list-style:none;padding:0rem 0.3rem;box-sizing: border-box;height:6.7rem;overflow-y:auto;
+              .DiscountItem{
+                width:100%;height:1.1rem;display:flex;align-items:center;border-bottom:solid 0.05px #f2f3f4;
+                .ItemImg{width:0.55rem;height:0.55rem;}
+                .ItemContent{width:8rem;padding-left:0.3rem;color:#878686;font-size: 0.35rem;}
+                .ItemYes{width:0.4rem;height:0.4rem;}
+              }
+            }
+          }
+    .SelectEdit{width:100%;height:1.7rem;display:flex;align-items:center;justify-content:space-around;background:#fff;border-top:solid 0.05px #f2f3f4;
+      .EditClear{width:4.5rem;height:1.2rem;border:solid 0.05px #ddd;line-height:1.2rem;text-align:center;color:#878686;border-radius:0.1rem;font-size: 0.4rem;}
+      .EditSubmit{ 
+                width:4.5rem;height:1.2rem;border:solid 0.05px #f44236;background:#f44236;color:#fff;line-height:1.2rem;text-align:center;border-radius:0.1rem;font-size: 0.4rem;
+              }
+    }
+  }
+  .projectItem{
+      width:100%;list-style:none;padding: 0rem;margin: 0rem;background: #fff;
+      .LiProjectItem{
+            width:100%;height:1.2rem;display:flex;align-items:center;margin-bottom: 1px;
+            .Title{
+            line-height:1.2rem;font-size: 0.4rem;width: 2.1rem;height: 1.2rem;text-align: center;;
+          }
+          .Content{
+            height:1.2rem;width:7.5rem;padding: 0.1rem;box-sizing:border-box;display: flex;;
+          }
+      }
+  }
+  .textContent{border: none;padding:0rem;margin:0rem;width:100%;height:100%;background-color:#fafafa;}
+  .ul_Demand{
+    list-style:none;width:100%;
+    .li_DemandItem{
+      width:100%;height:2.5rem;margin-top:0.1rem;background:#fff;padding:0rem 0.3rem;
+      p{
+        padding:0rem;margin:0rem;
+      }
+      .Title{
+        width:100%;height:1rem;font-size:0.5rem;line-height:1rem;color:#000;
+      }
+      .HospitalName{
+        width:100%;height:0.7rem;line-height:0.7rem;display:flex;align-items:center;justify-content:space-between;color:#ddd;font-size:0.4rem;
+      }
+      .Content{
+        width:100%;line-height:0.8rem;font-size:0.4rem;height:.8rem;color:#000;
+      }
+    }
+  }
+//需求跟踪首页面结束
+
+//需求添加页面的开始
+  .Add_Demand{position:relative;width:100%;height:100%;
+    .Top{
+        width: 100%;background: #fff;padding-left: 0.5rem;margin-top: 0.2rem;padding-bottom: 1px;box-sizing: border-box;
+      .DemandItem{
+        width: 100%;height: 1.3rem;border-bottom: solid 2px #f3f3f3;box-sizing: border-box;display: flex;align-items:center;
+        .Title{
+        width: 2.2rem;height: 100%;font-size: 0.45rem;display: flex;align-items: center;margin:0rem;
+        }
+        .Content{
+          width: 6.5rem;height: 100%;
+          input{
+            border: none;padding: 0rem;margin: 0rem;width: 100%;height: 100%;display: flex;align-items: center;font-size: 0.4rem;
+          }
+        }
+        .Right{
+          width: 0.6rem;height: 0.5rem;
+          img{
+            width: 100%;height: 100%;
+          }
+        }
+      }
+      .DemandContent{
+        width:100%;border-bottom: solid 2px #f3f3f3;box-sizing: border-box;display:flex;align-items:flex-star;
+        .Title{
+          width:2rem;height:1.3rem;font-size:0.45rem;display:flex;align-items:center;margin:0rem;
+        }
+          .Content{
+            width:6.5rem;
+            textarea{
+              width:100%;height:3rem;border:none;padding:0rem;margin:0rem;padding:0.45rem 0rem;font-size:0.4rem;;
+            }
+          }
+      }
+    }
+    .Middle{
+      width: 100%;background: #fff;padding-left: 0.5rem;margin-top: 0.2rem;padding-bottom: 1px;box-sizing: border-box;
+       .DemandItem{
+        width: 100%;height: 1.3rem;border-bottom: solid 2px #f3f3f3;box-sizing: border-box;display: flex;align-items:center;
+        .Title{
+          width: 2.2rem;height: 100%;font-size: 0.45rem;display: flex;align-items: center;margin:0rem;
+        }
+        .Content{
+          width: 6.5rem;height: 100%;
+                input{
+            border: none;padding: 0rem;margin: 0rem;width: 100%;height: 100%;display: flex;align-items: center;font-size: 0.4rem;
+          }
+        }
+        .Right{
+          width: 0.6rem;height: 0.5rem;
+          img{
+            width: 100%;height: 100%;
+          }
+        }
+      }
+    }
+    .upload{
+        padding: 0.2rem 0.3rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        position: relative;
+        border: 1px solid #999;
+        text-decoration: none;
+        color: #666;
+        font-size: 0.4rem;
+        box-sizing:content-box;;
+    }
+    .change{
+        position: absolute;
+        overflow: hidden;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .Bottom{position:absolute;left:0rem;bottom: 0.3rem;right: 0rem;
+      .SelectEdit{width:100%;display:flex;align-items:center;justify-content:space-around;background:#fff;border-top:solid 0.05px #f2f3f4;
+        .EditClear{width:50%;height:1.2rem;border:solid 0.05px #ddd;line-height:1.2rem;text-align:center;color:#878686;border-radius:0.1rem;font-size: 0.4rem;}
+        .EditSubmit{ 
+                  width:50%;height:1.2rem;border:solid 0.05px #f44236;background:#f44236;color:#fff;line-height:1.2rem;text-align:center;border-radius:0.1rem;font-size: 0.4rem;
+                }
+      }
+    }
+
+    .HospitalSelect{
+      width:100%;position:absolute;left:0rem;bottom:0rem;list-style:none;background:#fff;z-index:99;padding-bottom:0.5rem;top:null;height:9.4rem;overflow:hidden;
+      ul{width:100%;height:7.7rem;overflow-y:scroll;
+        .SortItem{width:100%;height:1.28rem;margin-top:1px;background:#fff;padding-left:0.8rem;display:flex;align-items:center;
+          span{line-height:1.28rem;font-size:0.357rem;width:8rem;}
+          span.active{color:#f44236;}
+          img{width:0.42rem;height:0.42rem;}
+        }
+      }
+      .ps_serach{height:1.28rem;width:10rem;padding:0rem 0.2rem 0rem 0.5rem;background-color:#fff;
+        .ps_divserach{width:100%;height:1rem;border-radius:0.2rem;background-color:#f7f7ff;
+          img{height:1rem;width:1rem;float:right;padding:0.2rem;    box-sizing: border-box;}
+          input{width:8.3rem;height:1rem;padding:0rem;margin:0rem;float:left;border:none;color:#e0e0e0;background-color:#f7f7ff;border-right: solid 2px #fff;}
+        }
+      }
+    }
+    .ExecutorSelect{
+      width:100%;position:absolute;left:0rem;bottom:0rem;list-style:none;background:#fff;z-index:99;padding-bottom:0.5rem;top:null;height:9.4rem;overflow:hidden;
+      ul{width:100%;height:7.7rem;overflow-y:scroll;
+        .SortItem{width:100%;height:1.28rem;margin-top:1px;background:#fff;padding-left:0.8rem;display:flex;align-items:center;
+          span{line-height:1.28rem;font-size:0.357rem;width:8rem;}
+          span.active{color:#f44236;}
+          img{width:0.42rem;height:0.42rem;}
+        }
+      }
+      .ps_serach{height:1.28rem;width:10rem;padding:0rem 0.2rem 0rem 0.5rem;background-color:#fff;
+        .ps_divserach{width:100%;height:1rem;border-radius:0.2rem;background-color:#f7f7ff;
+          img{height:1rem;width:1rem;float:right;padding:0.2rem;    box-sizing: border-box;}
+          input{width:8.3rem;height:1rem;padding:0rem;margin:0rem;float:left;border:none;color:#e0e0e0;background-color:#f7f7ff;border-right: solid 2px #fff;}
+        }
+      }
+    }
+  }
+//需求添加页面的结束
+//文本框编辑局部页开始
+  .BigEditInput{
+    width:100vw;height:100vh;z-index:999;position:absolute;top:0rem;left:0rem;
+  }
+  .EditInput{
+    width:100%;min-height:5rem;border-bottom:solid 1px #f3f3f3;padding:0.3rem;
+    textarea{
+      width:100%;min-height:5rem;border:none;padding:0rem;margin:0rem;
+    }
+  }
+  .BigEditInput.ng-hide-add,.BigEditInput.ng-hide-remove{
+    -webkit-transition:0.25s linear all;transition:0.25s linear all;display:block !important;
+  }
+  .BigEditInput.ng-hide-add{transform: translateX(0%);}
+  .BigEditInput.ng-hide-add.ng-hide-add-active{transform: translateX(100%);}
+  .BigEditInput.ng-hide-remove{transform: translateX(100%);}
+  .BigEditInput.ng-hide-remove.ng-hide-remove-active{transform: translateX(0%);}
+//文本框编辑局部页结束
+//登录注册页面的开始
+  .BigBJ{
+    width:100vw;height:100vh;background:url(../images/LoginBg2.png) center center no-repeat;background-size:100vw 100vh;padding:0rem 0.4rem 0.4rem 0.4rem;
+    .TopHead{
+      width:100%;height:1.5rem;display:flex;align-items:center;
+      img{
+        width:0.6rem;height:0.6rem;
+      }
+    }
+    .PageTitle{
+      width:100%;height:1.45rem;display:flex;align-items:center;
+      p{
+        font-size:0.857rem;color:white;
+      }
+    }
+    .BigIput{
+      width:100%;margin-top:0.4rem;
+      .InputItem{
+        width:100%;height:2rem;padding:0rem;margin:0rem;border-bottom:solid 2px #61bfab;display:flex;align-items:center;
+        input.Top{
+          width:70%;height:100%;border:none;padding:0rem;margin:0rem;color:white;font-size:0.7rem;background:none;padding-left:0.2rem;
+        }
+        input.Bottom{
+          width:50%;height:100%;border:none;padding:0rem;margin:0rem;color:white;font-size:0.7rem;background:none;padding-left:0.2rem;
+        }
+        input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { /* WebKit*/  
+            color:    #61bfab;  
+        }  
+        input:-moz-placeholder, textarea:-moz-placeholder { /* Mozilla Firefox 4 to 18 */  
+            color:    #61bfab;  
+        }  
+        input::-moz-placeholder, textarea::-moz-placeholder { /* Mozilla Firefox 19+ */  
+            color:    #61bfab;  
+        }  
+        input:-ms-input-placeholder, textarea:-ms-input-placeholder { /* IE 10+ */  
+            color:    #61bfab;  
+        }  
+        .Right.Top{
+          width:30%;height:100%;
+          .Btn{
+            width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+            span{
+              color:#71c2b1;font-size:0.5rem;
+            }
+          }
+        }
+        .Right.Bottom{
+          width:50%;height:100%;display:flex;align-items:center;justify-content:center;
+          #v_container{
+            width:80%;height:80%;
+            canvas{
+              width:100%;height:100%;
+            }
+          }
+        }
+      }
+    }
+    .BigEdit{
+      width:100%;height:1.5rem;display:flex;align-items:center;justify-content:space-between;margin-top:1rem;
+      .EditItem{
+        width:4.5rem;height:1.5rem;background-color:rgba(255,255,255,0.6);border-radius:0.2rem;display:flex;align-items:center;justify-content:center;
+        span{
+          color:#019a61;font-size:0.55rem;
+        }
+      }
+    }
+    .NextPage{
+      width:100%;height:1.4rem;position:fixed;left:0rem;bottom:0.2rem;padding:0rem 0.4rem;display:flex;justify-content:space-between;
+      .Left{
+        width:40%;height:90%;display:flex;align-items:center;justify-content:flex-star;
+        img{
+          width:0.4rem;height:0.4rem;margin-left:0.2rem;
+        }
+      }
+        .Right{
+          width:40%;height:90%;background-color:rgba(255,255,255,0.6);border-radius:0.2rem;display:flex;align-items:center;justify-content:center;
+          span{
+            color:#019a61;font-size:0.55rem;
+          }
+      }
+    }
+  }
+//登录注册页面的结束
