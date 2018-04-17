@@ -1,5 +1,5 @@
 'use strict';
-module.exports = angular.module('app.business').controller('demandCtrl', ['$state', '$http', '$scope','$cookieStore','DemandService', function($state, $http, $scope,$cookieStore,DemandService){
+module.exports = angular.module('app.business').controller('demandCtrl', ['$state', '$http', '$scope','$cookieStore','$ionicLoading','$timeout','DemandService', function($state, $http, $scope,$cookieStore,$ionicLoading,$timeout,DemandService){
   $scope.title="需求预览";
   $scope.SourceList=["全部","实施工程师","销售","部门经理","研发工程师","公司领导","用户"];
   $scope.AareaList=["西湖区","海宁区","上城区","下城区","杭州区域","三门县人民医院","绍兴地区","杭州地区","贵州省","衢州地区","台州地区","嘉善区域","陕西省"];
@@ -19,17 +19,32 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
   $scope.CurrentSelectHospital=null;//当前勾选的医院项
   $scope.model=false;
   new Mdate("dateSelectorStart", {
-    format: "-"
-});
+      format: "-"
+  });
   new Mdate("dateSelectorEnd", {
-    format: "-"
-});
+      format: "-"
+  });
+  $ionicLoading.show({
+    content: 'Loading',
+    animation: 'fade-in',
+    showBackdrop: true,
+    maxWidth: 200,
+    showDelay: 0
+  });
+  $scope.$watch('Data',function(now,old){
+    console.log("老"+old);
+    console.log("新"+now);
+  },true);
   $scope.TaggleModel=function(){
     $scope.model=!$scope.model;
   }
   function removeByValue(arr, val) {   for(var i=0; i<arr.length; i++) {     if(arr[i] == val) {       arr.splice(i, 1);       break;     }   } } //
   $scope.goBack=function(){
     window.history.back(-1);
+  };
+  $scope.doRefresh=function(){
+    $scope.SubmitSerach();
+    $scope.$broadcast('scroll.refreshComplete');
   };
   $scope.ChangeSelectScreen=function(index){
   	if(index==$scope.CurrentScreen){
@@ -115,6 +130,9 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
   };
   DemandService.GetDemandBySerach("","","","","","","").then(response=>{
     $scope.DemandList=response;
+    $timeout(function () {
+      $ionicLoading.hide();
+    }, 1000);
     // console.log(response);
   });//初始化获得需求预览数据
   DemandService.GetAllHospital().then(response=>{
@@ -122,7 +140,9 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
     // console.log(response.listUnit);
   })//初始化获得所有医院的数据
   $scope.SubmitSerach=function(){//提交查询函数的操作
-    console.log($("#dateSelectorStart").val());
+    // console.log($("#dateSelectorStart").val());
+    $ionicLoading.show();
+    console.log($scope.Data);
     var Status=$scope.SelectStatus.join(",");
     var Area="";
     if($scope.CurrentSelectHospital!=null)
@@ -140,6 +160,9 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
     DemandService.GetDemandBySerach($scope.SourceList[$scope.SelectSource],$("#dateSelectorStart").val(),$("#dateSelectorEnd").val(),$scope.SelectHosital,$scope.SelectZDR,Area,Status).then(response=>{
       $scope.DemandList=response;
       console.log(response);
+      $timeout(function () {
+        $ionicLoading.hide();
+      }, 1000);
     });
     $scope.CurrentScreen=0;
     $scope.model=false;
@@ -173,21 +196,21 @@ module.exports = angular.module('app.business').controller('addDemandCtrl', ['$s
     $scope.Executor=resp.listUser;
   });
   function getNowFormatDate() {
-　　var date = new Date();
-　　var seperator1 = "-";
-　　var seperator2 = ":";
-　　var year = date.getFullYear();
-　　var month = date.getMonth() + 1;
-　　var strDate = date.getDate();
-　　if (month >= 1 && month <= 9) {
-　　month = "0" + month;
-　　}
-　　if (strDate >= 0 && strDate <= 9) {
-　　strDate = "0" + strDate;
-　　}
-　　var currentdate = year + seperator1 + month + seperator1 + strDate;
-　　return currentdate;
-　　};
+  　　var date = new Date();
+  　　var seperator1 = "-";
+  　　var seperator2 = ":";
+  　　var year = date.getFullYear();
+  　　var month = date.getMonth() + 1;
+  　　var strDate = date.getDate();
+  　　if (month >= 1 && month <= 9) {
+  　　month = "0" + month;
+  　　}
+  　　if (strDate >= 0 && strDate <= 9) {
+  　　strDate = "0" + strDate;
+  　　}
+  　　var currentdate = year + seperator1 + month + seperator1 + strDate;
+  　　return currentdate;
+　 };
   $scope.TaggleHospital=function(){
     $scope.ShowHositalModel=!$scope.ShowHositalModel;
     $scope.ModelZzhe=true;
@@ -252,12 +275,22 @@ module.exports = angular.module('app.business').controller('DemandTestCtrl', ['$
 }]);
 
 'use strict';
-module.exports = angular.module('app.business').controller('DemandDetailsCtrl', ['$state', '$http', '$scope','$cookieStore','DemandService', function($state, $http, $scope,$cookieStore,DemandService){
+module.exports = angular.module('app.business').controller('DemandDetailsCtrl', ['$state', '$http', '$scope','$cookieStore','$ionicLoading','$timeout','DemandService', function($state, $http, $scope,$cookieStore,$ionicLoading,$timeout,DemandService){
       $scope.title="需求详情";
       $scope.SelectHosital="";
       $scope.SelectExecutor="";
+      $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
       DemandService.GetDemandByID($state.params.id).then(response=>{
         $scope.Obj=response;
+        $timeout(function () {
+          $ionicLoading.hide();
+        }, 1000);
       });
 }]);
 

@@ -6,7 +6,9 @@
                 <ion-refresher pulling-text="下拉刷新" refreshing-text="刷新成功" on-refresh="doRefresh()"></ion-refresher>
                 <div class="Weekly">
   <div class="TopTitle">
-       <span ng-click="TaggleModel()">周报</span>
+       <!-- <span id="dateShowBtn">日期</span> -->
+       <button type="button" id="dateShowBtn">日期</button>
+       <input type="text" id="DataSelect" style="display:none;" name="">
     <div class="swiper-container" id="nav">
     <div class="swiper-wrapper">
 <!--       <div class="swiper-slide" ng-repeat="Item in Week">
@@ -30,6 +32,7 @@
       </div>
     </div>
   </div>
+  <span ng-click="SubmitData()">查询</span>
   </div>
   <div class="swiper-container" id="page">
   <div class="swiper-wrapper">

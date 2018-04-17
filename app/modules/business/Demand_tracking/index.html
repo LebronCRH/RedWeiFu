@@ -19,22 +19,43 @@
                 <span>筛选 <i></i></span>
         </li>
      </ul>
-      <ul class="SortSelect FourMenu SourceSelect" ng-show="CurrentScreen==1"">
-             <li class="SortItem" ng-repeat="(Index,Item) in SourceList" ng-click="ChangeSource(Index)">
-                <span class="CurrentSort">{{Item}}</span>
-                <img src="../../../images/yes.png" ng-show="SelectSource==Index">
-             </li>             
-      </ul>
 
-      <ul class="SortSelect FourMenu AreaSelect" ng-show="CurrentScreen==2">
-             <li class="SortItem" ng-repeat="(Index,Item) in AareaList" ng-click="ChangeArea(Index)">
-                <span class="CurrentSort">{{Item}}</span>
-                <img src="../../../images/yes.png" ng-show="SelectArea==Index">
-             </li>             
-      </ul>
+      <div class="SortSelect FourMenu" ng-show="CurrentScreen==1">
+            <ul class="SourceSelect">
+                   <li class="SortItem" ng-repeat="(Index,Item) in SourceList" ng-click="ChangeSource(Index)">
+                      <span class="CurrentSort">{{Item}}</span>
+                      <img src="../../../images/yes.png" ng-show="SelectSource==Index">
+                   </li>             
+            </ul>
+            <div class="SelectEdit">
+                  <div class="EditClear">
+                      清空
+                  </div>
+                  <div class="EditSubmit" ng-click="SubmitSerach()">
+                    确定
+                  </div>
+            </div>
+      </div>
+
+      <div class="SortSelect FourMenu" ng-show="CurrentScreen==2">
+            <ul class="AreaSelect">
+                   <li class="SortItem" ng-repeat="(Index,Item) in AareaList" ng-click="ChangeArea(Index)">
+                      <span class="CurrentSort">{{Item}}</span>
+                      <img src="../../../images/yes.png" ng-show="SelectArea==Index">
+                   </li>             
+            </ul>
+            <div class="SelectEdit">
+                  <div class="EditClear">
+                      清空
+                  </div>
+                  <div class="EditSubmit" ng-click="SubmitSerach()">
+                    确定
+                  </div>
+            </div>
+      </div>
 
       <div class="SortSelect FourMenu" ng-show="CurrentScreen==3">
-           <ul class="projectItem">
+            <ul class="projectItem">
                 <li class="LiProjectItem">
                 <p class="Title">起始时间</p>
                 <div class="Content">
@@ -47,7 +68,15 @@
                 <input type="text" id="dateSelectorEnd" ng-model="Data.EndTime" class="textContent" ng-model="SerachHospital">
                 </div>
                 </li>
-              </ul>
+            </ul>
+            <div class="SelectEdit">
+                  <div class="EditClear">
+                      清空
+                  </div>
+                  <div class="EditSubmit" ng-click="SubmitSerach()">
+                    确定
+                  </div>
+            </div>
       </div>
 
       <div class="FourMenu BigCharactSelect" ng-show="CurrentScreen==4">

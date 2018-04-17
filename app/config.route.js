@@ -16,7 +16,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         {
             name: 'WorkWeekly',
             ctrl: 'weeklyCtrl',
-            url: 'WorkWeekly',
+            url: 'WorkWeekly/:date',
             tpl: './modules/business/WorkWeekly/WorkWeekly'
         },
         {

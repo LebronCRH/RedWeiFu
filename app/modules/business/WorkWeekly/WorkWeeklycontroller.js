@@ -1,17 +1,33 @@
 'use strict';
-module.exports = angular.module('app.business').controller('weeklyCtrl', ['$state', '$http', '$scope','$cookieStore', '$rootScope','WeeklyService',function($state, $http, $scope,$cookieStore,$rootScope,WeeklyService){
+module.exports = angular.module('app.business').controller('weeklyCtrl', ['$state', '$http', '$scope','$cookieStore', '$rootScope','$ionicLoading','$timeout','WeeklyService',function($state, $http, $scope,$cookieStore,$rootScope,$ionicLoading,$timeout,WeeklyService){
   $scope.CurrentActiveSlide=0;
   $scope.title="工作周报";
   $scope.model=false;
+  $ionicLoading.show({
+    content: 'Loading',
+    animation: 'fade-in',
+    showBackdrop: true,
+    maxWidth: 200,
+    showDelay: 0
+  });
+  // console.log("页面");
+  new Mdate("dateShowBtn", {
+      acceptId: "DataSelect",
+      format: "-"
+  });
+  // console.log($state.params.date);
   // $http.get("http://localhost:8085/WorkWeekly/GetWeeklyNotes").success(function(resp){
-  WeeklyService.GetWeeklyNotes(sessionStorage.getItem("UserName")).then(resp=>{
+  WeeklyService.GetWeeklyNotes(sessionStorage.getItem("UserName"),'').then(resp=>{
     $scope.Week=resp;
     $scope.CurrentObjectDay=$scope.Week[0];
     console.log($scope.Week);
+    $timeout(function () {
+      $ionicLoading.hide();
+    }, 1000);
   });
   // $http.get("http://localhost:8085/WorkWeekly/GetSummaryAndPlan").success(function(resp){
-  WeeklyService.GetSummaryAndPlan().then(resp=>{
-    $scope.SummaryOrPlan=resp[0];
+  WeeklyService.GetSummaryAndPlan(sessionStorage.getItem("UserName"),'').then(resp=>{
+    $scope.SummaryOrPlan=resp;
     console.log($scope.SummaryOrPlan);
   });
   // $scope.SummaryOrPlan={"Summary":"4567","Plan":"3456"};
@@ -20,7 +36,21 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
   // $scope.CurrentObjectDayState=$scope.Week[0]["Record"];
   $scope.goBack=function(){
     window.history.back(-1);
-  }
+  };
+  $scope.SubmitData=function(){
+    $ionicLoading.show();
+      WeeklyService.GetSummaryAndPlan(sessionStorage.getItem("UserName"),$("#DataSelect").val()).then(resp=>{
+        $scope.SummaryOrPlan=resp;
+      });
+      WeeklyService.GetWeeklyNotes(sessionStorage.getItem("UserName"),$("#DataSelect").val()).then(resp=>{
+        $scope.Week=resp;
+        $scope.CurrentObjectDay=$scope.Week[0];
+        console.log($scope.Week);
+        $timeout(function () {
+          $ionicLoading.hide();
+        }, 1000);
+      });
+  };
   var barwidth = 36; //导航粉色条的长度px
   var tSpeed = 300 ;//切换速度300ms
   var navSlideWidth;
@@ -29,7 +59,7 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
   // $scope.$watch('$viewContentLoaded', function(){
   //   console.log("开始");
   navSwiper = new Swiper('#nav', {
-    slidesPerView: 6,
+    slidesPerView: 5,
     freeMode: true,
     on: {
       init: function() {
@@ -39,7 +69,6 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
         bar.transition(tSpeed)
         navSum = this.slides[this.slides.length - 1].offsetLeft //最后一个slide的位置
         // console.log(navSum);
-
         clientWidth = parseInt(this.$wrapperEl.css('width')) //Nav的可视宽度
         navWidth = 0
         for (i = 0; i < this.slides.length; i++) {
@@ -212,24 +241,31 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
     }
   }
   $scope.SubmitWeeklyItem=function(Item){
+    $ionicLoading.show();
     // $http.post("http://localhost:8085/WorkWeekly/SaveNote", Item).then(function (res) {
     WeeklyService.SaveNote(Item).then(res=>{
      console.log(res);
+      $timeout(function () {
+        $ionicLoading.hide();
+      }, 1000);
      alert("保存成功");
     })
-    console.log(Item);
   }
   $scope.SubmitAllData=function(){
+    $ionicLoading.show();
     var Data={
       "Summary":$scope.SummaryOrPlan.Summary,
       "Plan":$scope.SummaryOrPlan.Plan,
       "WriteDate":$scope.Week[0].NoteDate,
-      "Writer":localStorage.getItem("UserName"),
+      "Writer":sessionStorage.getItem("UserName"),
     }
     // $http.post("http://localhost:8085/WorkWeekly/SaveSummaryAndPlan", Data).then(function (res) {
     WeeklyService.SaveSummaryAndPlan(Data).then(res=>{
-     console.log(res)
-     alert("保存成功");
+       console.log(res)
+       $timeout(function () {
+          $ionicLoading.hide();
+       }, 1000);
+       alert("保存成功");
     })
   }
 }]);

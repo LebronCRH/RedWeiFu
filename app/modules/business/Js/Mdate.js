@@ -9,7 +9,7 @@ module.exports =(function(window, document) {
 		d.getElementsByTagName("head")[0].appendChild(link)
 	};
 	var dateopts={
-			beginYear:2000,beginMonth:1,beginDay:1,endYear:new Date().getFullYear(),endMonth:new Date().getMonth()+1,endDay:new Date().getDate(),format:"YMD"};
+			beginYear:2000,beginMonth:1,beginDay:1,endYear:new Date().getFullYear(),endMonth:new Date().getMonth()+1,endDay:new Date().getDate(),format:"YMD",SubmitData:function(){console.log("提交时间")}};
 			var MdSelectId="";var MdAcceptId="";var dateContentBox="";var datePlugs="";var yearTag="";var monthTag="";var dayTag="";var indexY=1;var indexM=1;
 			var indexD=1;var initM=null;var initD=null;var yearScroll=null;var monthScroll=null;var dayScroll=null;
 			var Mdate=function(el,opts){
@@ -25,6 +25,7 @@ module.exports =(function(window, document) {
 				this.endMonth=opts.endMonth||dateopts.endMonth;
 				this.endDay=opts.endDay||dateopts.endDay;
 				this.format=opts.format||dateopts.format;
+				this.SubmitData=opts.SubmitData||dateopts.SubmitData;
 				this.dateBoxShow()
 			};
 			Mdate.prototype={
@@ -46,6 +47,8 @@ module.exports =(function(window, document) {
 						var yearUl=d.getElementById("yearUl");
 						var monthUl=d.getElementById("monthUl");
 						var dayUl=d.getElementById("dayUl");
+						var Submit=d.getElementById("dateSure");
+						Submit.addEventListener("click",that.SubmitData);
 						yearUl.innerHTML=that.createDateYMD("year");
 						that.initScroll();
 						that.refreshScroll()

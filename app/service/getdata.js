@@ -8,12 +8,16 @@ import fetch from '../config/fetch'
 	});
 	
 	//获得用户的周报信息
-	export const GetWeeklyNotes=(username)=>fetch('/WorkWeekly/GetWeeklyNotes',{
+	export const GetWeeklyNotes=(username,dateselect)=>fetch('/WorkWeekly/GetWeeklyNotes',{
 		UserName:username,
+		DateSelect:dateselect,
 	});
 
 	//获取用户的周总结和周计划信息
-	export const GetSummaryAndPlan=()=>fetch('/WorkWeekly/GetSummaryAndPlan');
+	export const GetSummaryAndPlan=(username,dateselect)=>fetch('/WorkWeekly/GetSummaryAndPlan',{
+		UserName:username,
+		DateSelect:dateselect,
+	});
 
 	//用户提交某一天的工作日报
 	export const SaveNote=(Obj)=>fetch('/WorkWeekly/SaveNote',Obj,'POST')
