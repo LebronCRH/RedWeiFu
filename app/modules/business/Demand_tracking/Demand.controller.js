@@ -1,14 +1,16 @@
 'use strict';
 module.exports = angular.module('app.business').controller('demandCtrl', ['$state', '$http', '$scope','$cookieStore','$ionicLoading','$timeout','DemandService', function($state, $http, $scope,$cookieStore,$ionicLoading,$timeout,DemandService){
   $scope.title="需求预览";
+  $scope.SonTitle="医院选择";
+  $scope.Sonmodal=false;
   $scope.SourceList=["全部","实施工程师","销售","部门经理","研发工程师","公司领导","用户"];
   $scope.AareaList=["西湖区","海宁区","上城区","下城区","杭州区域","三门县人民医院","绍兴地区","杭州地区","贵州省","衢州地区","台州地区","嘉善区域","陕西省"];
   $scope.StatusList=["全部","登记","沟通中","确认","完成","挂起"];
   $scope.SelectSource=0;//来源的选择
   $scope.SelectArea=null;//地区的选择
   $scope.Data={
-    StarTime:"2018-04-09",//起始时间
-    EndTime:"2018-04-16",//截止时间
+    StarTime:GetMonDate(),//起始时间
+    EndTime:GetSunDate(),//截止时间
   };
   $scope.StarTime="2018-04-09";//起始时间
   $scope.EndTime="2018-04-16";//截止时间
@@ -17,12 +19,23 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
   $scope.SelectStatus=[];//状态的选择;
   $scope.CurrentScreen=0;//显示4个筛选模态界面的状态值
   $scope.CurrentSelectHospital=null;//当前勾选的医院项
+  $scope.PrivSelectHospital=null;//记录上一次勾选的医院项
+  $scope.SerachHospital="";
   $scope.model=false;
-  new Mdate("dateSelectorStart", {
-      format: "-"
+  // new Mdate("dateSelectorStart", {
+  //     format: "-"
+  // });
+  $('#dateSelectorStart').mdater({ 
+    // minDate : new Date(2015, 2, 10) 
   });
-  new Mdate("dateSelectorEnd", {
-      format: "-"
+  $('#dateSelectorStart, #dateSelectorEnd').click(function(){
+    $('.shadow2').show();
+  });
+  // new Mdate("dateSelectorEnd", {
+  //     format: "-"
+  // });
+  $('#dateSelectorEnd').mdater({ 
+    // minDate : new Date(2015, 2, 10) 
   });
   $ionicLoading.show({
     content: 'Loading',
@@ -31,6 +44,51 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
     maxWidth: 200,
     showDelay: 0
   });
+  $scope.SontaggleModel=function(){
+    $scope.Sonmodal=!$scope.Sonmodal;
+  }
+  function GetMonDate(){//获取本周的第一天周一的时间
+    var d=new Date(),
+    day=d.getDay(),
+    date=d.getDate();
+    if(day==1)
+    return d;
+    if(day==0)
+    d.setDate(date-6);
+    else
+    d.setDate(date-day+1);
+    var returnDate=GetDayString(d);
+    return returnDate;
+  };
+  function GetSunDate()//获取本周的最后一天周日的时间
+  {
+    var d=new Date(),
+    day=d.getDay(),
+    date=d.getDate();
+    if(day==0)
+    return d;
+    if(day==1)
+    d.setDate(date+6);
+    else
+    d.setDate(date+7-day);
+    var returnDate=GetDayString(d);
+    return returnDate;
+  };
+  function GetDayString(myDate){//将时间日期格式化成YYYY-MM-DD形式
+      var years = myDate.getFullYear();
+      var month =myDate.getMonth()+1;
+      if (month >= 1 && month <= 9) {
+          month = "0" + month;
+      }
+      var days =myDate.getDate();
+      if (days >= 0 && days <= 9) {
+          days = "0" + days;
+      }
+      var ndate = years+"-"+month+"-"+days;
+      return ndate;
+  };
+  console.log(GetMonDate());
+  console.log(GetSunDate());
   $scope.$watch('Data',function(now,old){
     console.log("老"+old);
     console.log("新"+now);
@@ -128,6 +186,32 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
       $scope.CurrentSelectHospital=Item;
     }
   };
+
+  $scope.SonBack=function()
+  {
+    $scope.CurrentSelectHospital=$scope.PrivSelectHospital;
+    if($scope.CurrentSelectHospital!=null)
+    {
+      $scope.SerachHospital=$scope.CurrentSelectHospital.UnitName;
+    }else
+    {
+      $scope.SerachHospital="";
+    }
+    $scope.Sonmodal=!$scope.Sonmodal;
+  };
+  $scope.SonComplete=function()
+  {
+    $scope.PrivSelectHospital=$scope.CurrentSelectHospital;
+    if($scope.CurrentSelectHospital!=null)
+    {
+      console.log($scope.CurrentSelectHospital);
+      $scope.SerachHospital=$scope.CurrentSelectHospital.UnitName;
+    }else{
+      $scope.SerachHospital="";
+    }
+    $scope.Sonmodal=!$scope.Sonmodal;
+  };
+
   DemandService.GetDemandBySerach("","","","","","","").then(response=>{
     $scope.DemandList=response;
     $timeout(function () {

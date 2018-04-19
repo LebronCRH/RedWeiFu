@@ -1,0 +1,46 @@
+<div class="BigEditInput" ng-show="Sonmodal">
+<ion-pane>
+  <ion-header-bar>
+  <div class="all_head1">
+     <div class="all_head1back" ng-click="SonBack()">
+       <img src="../../../../images/back.png">
+     </div>
+     <div class="all_head1mid">
+     <p>{{SonTitle}}</p>
+     </div>
+     <div class="all_head1edit" ng-click="SonComplete()">
+     <img src="../../../../images/OK.png">
+     </div>
+  </div>
+  </ion-header-bar>
+     <ion-content style="top:1.5rem;">
+     <div class="SonHospitalSelect">
+<!--           <div class="Topfixed">
+            <div class="ps_serach">
+               <div class="ps_divserach">
+               <input type="text" ng-model="SerachName" name="serachName">
+               <img src="../../../../images/serach2.png">
+               </div>
+            </div>
+            <p class="CharacgTitle">医院选择</p>
+          </div> -->
+           <ul class="ul_Discount ul_Hospital">
+              <li class="DiscountItem HospitalItem" ng-repeat="Item in HospitalList |filter:SonSerachName" ng-click="ChangeHospital(Item)">
+                <img class="ItemImg" src="../../../../images/hospital.png">
+                <span class="ItemContent">{{Item.UnitName}}</span>
+                <img class="ItemYes" ng-show="CurrentSelectHospital.Id==Item.Id" src="../../../../images/yes.png">
+              </li>
+           </ul>
+     </div>
+  </ion-content>
+            <div class="Topfixed">
+            <div class="ps_serach">
+               <div class="ps_divserach">
+               <input type="text" ng-model="SonSerachName" name="serachName" placeholder="请输入关键字搜索…">
+               <img src="../../../../images/serach2.png">
+               </div>
+            </div>
+            <p class="CharacgTitle">医院选择</p>
+          </div>
+</ion-pane>
+</div>

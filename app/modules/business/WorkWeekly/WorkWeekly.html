@@ -14,19 +14,47 @@
 <!--       <div class="swiper-slide" ng-repeat="Item in Week">
         <span>{{Item.Day}}</span></div> -->
       <div class="swiper-slide">
-        <span>{{Week[0].NoteDate|limitTo:5:5}}</span></div>
+        <div class="DatItem">
+         <p ng-if="Week[0].NoteDate!=CurrentDay" class="yuu">周一</p><p ng-if="Week[0].NoteDate==CurrentDay" class="yuu">当天</p>
+         <p class="yuu">{{Week[0].NoteDate|limitTo:5:5}}</p>
+        </div>
+      </div>
       <div class="swiper-slide">
-        <span>{{Week[1].NoteDate|limitTo:5:5}}</span></div>
+        <div class="DatItem">
+         <p ng-if="Week[1].NoteDate!=CurrentDay" class="yuu">周二</p><p ng-if="Week[1].NoteDate==CurrentDay" class="yuu">当天</p>
+         <p class="yuu">{{Week[1].NoteDate|limitTo:5:5}}</p>
+        </div>
+      </div> 
       <div class="swiper-slide">
-        <span>{{Week[2].NoteDate|limitTo:5:5}}</span></div>
+        <div class="DatItem">
+         <p ng-if="Week[2].NoteDate!=CurrentDay" class="yuu">周三</p><p ng-if="Week[2].NoteDate==CurrentDay" class="yuu">当天</p>
+         <p class="yuu">{{Week[2].NoteDate|limitTo:5:5}}</p>
+        </div>
+      </div>
       <div class="swiper-slide">
-        <span>{{Week[3].NoteDate|limitTo:5:5}}</span></div>
+        <div class="DatItem">
+         <p ng-if="Week[3].NoteDate!=CurrentDay" class="yuu">周四</p><p ng-if="Week[3].NoteDate==CurrentDay" class="yuu">当天</p>
+         <p class="yuu">{{Week[3].NoteDate|limitTo:5:5}}</p>
+        </div>
+      </div>
       <div class="swiper-slide">
-        <span>{{Week[4].NoteDate|limitTo:5:5}}</span></div>
+        <div class="DatItem">
+         <p ng-if="Week[4].NoteDate!=CurrentDay" class="yuu">周五</p><p ng-if="Week[4].NoteDate==CurrentDay" class="yuu">当天</p>
+         <p class="yuu">{{Week[4].NoteDate|limitTo:5:5}}</p>
+        </div>
+      </div>
       <div class="swiper-slide">
-        <span>{{Week[5].NoteDate|limitTo:5:5}}</span></div>
+        <div class="DatItem">
+         <p ng-if="Week[5].NoteDate!=CurrentDay" class="yuu">周六</p><p ng-if="Week[5].NoteDate==CurrentDay" class="yuu">当天</p>
+         <p class="yuu">{{Week[5].NoteDate|limitTo:5:5}}</p>
+        </div>
+      </div>
       <div class="swiper-slide">
-        <span>{{Week[6].NoteDate|limitTo:5:5}}</span></div>
+        <div class="DatItem">
+         <p ng-if="Week[6].NoteDate!=CurrentDay" class="yuu">周日</p><p ng-if="Week[6].NoteDate==CurrentDay" class="yuu">当天</p>
+         <p class="yuu">{{Week[6].NoteDate|limitTo:5:5}}</p>
+        </div>
+      </div>
       <div class="bar">
         <div class="color"></div>
       </div>
@@ -119,5 +147,7 @@
     on-infinite="loadMore()">  
   </ion-infinite-scroll> 
 </ion-content>
-  <div app-edit-input modal="modal" taggle-model="TaggleModel()" current-object-day-state="CurrentObjectDayState" complete-edit="CompleteEdit"></div>
+  <div app-edit-input modal="modal" taggle-model="TaggleModel()" edit-title="EditTitle" current-object-day-state="CurrentObjectDayState" complete-edit="CompleteEdit"></div>
+
+  <div class="shadow2" style="position: absolute;left: 0rem;right: 0rem;bottom:0rem;top: 1.5rem;background-color: rgba(0, 0, 0, 0.5);display: none;"></div>
 </ion-pane>

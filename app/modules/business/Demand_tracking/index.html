@@ -59,13 +59,13 @@
                 <li class="LiProjectItem">
                 <p class="Title">起始时间</p>
                 <div class="Content">
-                <input type="text" id="dateSelectorStart" ng-model="Data.StarTime" class="textContent">
+                <input type="text" id="dateSelectorStart" ng-model="Data.StarTime" class="textContent" readonly>
                 </div>
                 </li>
                 <li class="LiProjectItem">
                 <p class="Title">截止时间</p>
                 <div class="Content">
-                <input type="text" id="dateSelectorEnd" ng-model="Data.EndTime" class="textContent" ng-model="SerachHospital">
+                <input type="text" id="dateSelectorEnd" ng-model="Data.EndTime" class="textContent" ng-model="SerachHospital" readonly>
                 </div>
                 </li>
             </ul>
@@ -97,18 +97,18 @@
                 <li class="LiProjectItem">
                 <p class="Title">医院名</p>
                 <div class="Content">
-                <input type="text" class="textContent" ng-model="SerachHospital">
+                <input type="text" class="textContent" ng-model="SerachHospital" ng-click="SontaggleModel()" readonly>
                 </div>
                 </li>
               </ul>
-           <p class="CharacgTitle">医院选择</p>
+<!--            <p class="CharacgTitle">医院选择</p>
            <ul class="ul_Discount ul_Hospital">
               <li class="DiscountItem HospitalItem" ng-repeat="Item in HospitalList |filter:SerachHospital" ng-click="ChangeHospital(Item)">
                 <img class="ItemImg" src="../../../images/hospital.png">
                 <span class="ItemContent">{{Item.UnitName}}</span>
                 <img class="ItemYes" ng-show="CurrentSelectHospital.Id==Item.Id" src="../../../images/yes.png">
               </li>
-           </ul>
+           </ul> -->
         </div>
         <div class="SelectEdit">
               <div class="EditClear">
@@ -136,5 +136,8 @@
     on-infinite="loadMore()">  
   </ion-infinite-scroll> 
 </ion-content>
+  <div app-hospital-select Sonmodal="Sonmodal" current-select-hospital="CurrentSelectHospital" HospitalList="HospitalList" sontaggle-model="SontaggleModel()" change-hospital="ChangeHospital()" son-back="SonBack()" son-complete="SonComplete()" son-title="SonTitle"></div>
+
 <div class="shadow" ng-show="model" ng-click="ModelChose()" style="position: absolute;left: 0rem;right: 0rem;bottom:0rem;top: 1.15rem;background-color: rgba(0, 0, 0, 0.7);"></div>
+  <div class="shadow2" style="position: absolute;left: 0rem;right: 0rem;bottom:0rem;top: 1.5rem;background-color: rgba(0, 0, 0, 0.5);display: none;z-index:99;"></div>
 </ion-pane>

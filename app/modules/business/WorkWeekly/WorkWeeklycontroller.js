@@ -3,6 +3,9 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
   $scope.CurrentActiveSlide=0;
   $scope.title="工作周报";
   $scope.model=false;
+  $scope.EditTitle="文本编辑";
+  $scope.CurrentShowDay=0;
+  $scope.CurrentDay=GetCurrentDay();
   $ionicLoading.show({
     content: 'Loading',
     animation: 'fade-in',
@@ -11,14 +14,53 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
     showDelay: 0
   });
   // console.log("页面");
-  new Mdate("dateShowBtn", {
-      acceptId: "DataSelect",
-      format: "-"
+  // new Mdate("dateShowBtn", {
+  //     acceptId: "DataSelect",
+  //     format: "-"
+  // });
+  $("#dateShowBtn").click(function(){
+    $('.shadow2').show();
+    $('#DataSelect').click();
   });
+  $('#DataSelect').mdater({ 
+    // minDate : new Date(2015, 2, 10) 
+  });
+  function GetCurrentDay(){
+      var myDate = new Date();
+      var years = myDate.getFullYear();
+      var month =myDate.getMonth()+1;
+      if (month >= 1 && month <= 9) {
+          month = "0" + month;
+      }
+      var days =myDate.getDate();
+      if (days >= 0 && days <= 9) {
+          days = "0" + days;
+      }
+      var ndate = years+"-"+month+"-"+days;
+      return ndate;
+  };
   // console.log($state.params.date);
   // $http.get("http://localhost:8085/WorkWeekly/GetWeeklyNotes").success(function(resp){
   WeeklyService.GetWeeklyNotes(sessionStorage.getItem("UserName"),'').then(resp=>{
     $scope.Week=resp;
+    resp.forEach((item,index)=>{
+      // var myDate = new Date();
+      // var years = myDate.getFullYear();
+      // var month =myDate.getMonth()+1;
+      // if (month >= 1 && month <= 9) {
+      //     month = "0" + month;
+      // }
+      // var days =myDate.getDate();
+      // if (days >= 0 && days <= 9) {
+      //     days = "0" + days;
+      // }
+      // var ndate = years+"-"+month+"-"+days;
+      if(item.NoteDate==$scope.CurrentDay)
+      {
+        $scope.CurrentShowDay=index;
+        console.log(index);
+      }
+    })
     $scope.CurrentObjectDay=$scope.Week[0];
     console.log($scope.Week);
     $timeout(function () {
@@ -44,6 +86,27 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
       });
       WeeklyService.GetWeeklyNotes(sessionStorage.getItem("UserName"),$("#DataSelect").val()).then(resp=>{
         $scope.Week=resp;
+        var Flag=0;
+        resp.forEach((item,index)=>{
+          // var myDate = new Date();
+          // var years = myDate.getFullYear();
+          // var month =myDate.getMonth()+1;
+          // if (month >= 1 && month <= 9) {
+          //     month = "0" + month;
+          // }
+          // var days =myDate.getDate();
+          // if (days >= 0 && days <= 9) {
+          //     days = "0" + days;
+          // }
+          // var ndate = years+"-"+month+"-"+days;
+          if(item.NoteDate==$scope.CurrentDay)
+          {
+            Flag=index;
+            console.log(index+"有请求"+$scope.CurrentShowDay);
+          }
+        })
+        $scope.CurrentShowDay=Flag;//控制如果有日期是当天的跳到当天 否则跳到第一天
+
         $scope.CurrentObjectDay=$scope.Week[0];
         console.log($scope.Week);
         $timeout(function () {
@@ -97,7 +160,7 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
             r = Math.floor((255 - 51) * (1 - Math.pow(Math.abs(slideProgress), 2)) + 51)
             g = Math.floor((72 - 51) * (1 - Math.pow(Math.abs(slideProgress), 2)) + 51)
             b = Math.floor((145 - 51) * (1 - Math.pow(Math.abs(slideProgress), 2)) + 51)
-            navSwiper.slides.eq(i).find('span').css('color', 'rgba(' + r + ',' + g + ',' + b + ',1)')
+            navSwiper.slides.eq(i).find('p').css('color', 'rgba(' + r + ',' + g + ',' + b + ',1)')
           }
         }
       },
@@ -110,15 +173,15 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
         bar.transition(tSpeed)
         bar.transform('translateX(' + activeSlidePosition + 'px)')
         //释放时文字变色过渡
-        navSwiper.slides.eq(activeIndex).find('span').transition(tSpeed)
-        navSwiper.slides.eq(activeIndex).find('span').css('color', 'rgba(255,72,145,1)')
+        navSwiper.slides.eq(activeIndex).find('p').transition(tSpeed)
+        navSwiper.slides.eq(activeIndex).find('p').css('color', 'rgba(255,72,145,1)')
         if (activeIndex > 0) {
-          navSwiper.slides.eq(activeIndex - 1).find('span').transition(tSpeed)
-          navSwiper.slides.eq(activeIndex - 1).find('span').css('color', 'rgba(51,51,51,1)')
+          navSwiper.slides.eq(activeIndex - 1).find('p').transition(tSpeed)
+          navSwiper.slides.eq(activeIndex - 1).find('p').css('color', 'rgba(51,51,51,1)')
         }
         if (activeIndex < this.slides.length) {
-          navSwiper.slides.eq(activeIndex + 1).find('span').transition(tSpeed)
-          navSwiper.slides.eq(activeIndex + 1).find('span').css('color', 'rgba(51,51,51,1)')
+          navSwiper.slides.eq(activeIndex + 1).find('p').transition(tSpeed)
+          navSwiper.slides.eq(activeIndex + 1).find('p').css('color', 'rgba(51,51,51,1)')
         }
         //导航居中
         navActiveSlideLeft = navSwiper.slides[activeIndex].offsetLeft //activeSlide距左边的距离
@@ -142,22 +205,30 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
     clickIndex = this.clickedIndex
     clickSlide = this.slides.eq(clickIndex)
     pageSwiper.slideTo(clickIndex, 0);
-    this.slides.find('span').css('color', 'rgba(51,51,51,1)');
-    clickSlide.find('span').css('color', 'rgba(255,72,145,1)');
+    this.slides.find('p').css('color', 'rgba(51,51,51,1)');
+    clickSlide.find('p').css('color', 'rgba(255,72,145,1)');
   })
+  $scope.$watch('CurrentShowDay',function(now,old){
+    clickSlide = navSwiper.slides.eq(now)
+    navSwiper.slideTo(now, 1000, false);
+    pageSwiper.slideTo(now, 0);
+    activeSlidePosition = navSwiper.slides[now].offsetLeft
+        //释放时导航粉色条移动过渡
+    bar.transition(tSpeed)
+    bar.transform('translateX(' + activeSlidePosition + 'px)')
+    navSwiper.slides.find('p').css('color', 'rgba(51,51,51,1)');
+    clickSlide.find('p').css('color', 'rgba(255,72,145,1)');
+  },true);
 // });
   $scope.TaggleModel=function(){
     $scope.model=!$scope.model;
-    // console.log($scope.model);
-    // console.log($scope.Week);
-    // console.log($scope.CurrentObjectDayState);
-    // console.log($scope.CurrentObjectDay);
   }
   $scope.OpenRecordEditInput=function(){
     $scope.CurrentObjectDay=$scope.Week[$scope.CurrentActiveSlide];
     // $scope.CurrentObjectDayState=$scope.CurrentObjectDay.Record;
     $scope.CurrentObjectDayState=$scope.CurrentObjectDay.Note;
     $scope.CurrentSelectIdex=0;
+    $scope.EditTitle="记录编辑";
     $scope.TaggleModel();
   }
   $scope.OpenWhereaboutsEditInput=function(){
@@ -165,6 +236,7 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
     // $scope.CurrentObjectDayState=$scope.CurrentObjectDay.Whereabouts;
     $scope.CurrentObjectDayState=$scope.CurrentObjectDay.location;
     $scope.CurrentSelectIdex=1;
+    $scope.EditTitle="去向编辑";
     $scope.TaggleModel();
   }
   $scope.OpenRemarksEditInput=function(){
@@ -172,6 +244,7 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
     // $scope.CurrentObjectDayState=$scope.CurrentObjectDay.Remarks;
     $scope.CurrentObjectDayState=$scope.CurrentObjectDay.Remarks;
     $scope.CurrentSelectIdex=2;
+    $scope.EditTitle="备注编辑";
     $scope.TaggleModel();
   }
   $scope.OpenProjectEditInput=function(){
@@ -179,6 +252,7 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
     // $scope.CurrentObjectDayState=$scope.CurrentObjectDay.Project;
     $scope.CurrentObjectDayState=$scope.CurrentObjectDay.workingload;
     $scope.CurrentSelectIdex=3;
+    $scope.EditTitle="相关项目";
     $scope.TaggleModel();
   }
   $scope.OpenAttendanceEditInput=function(){
@@ -186,16 +260,19 @@ module.exports = angular.module('app.business').controller('weeklyCtrl', ['$stat
     // $scope.CurrentObjectDayState=$scope.CurrentObjectDay.Attendance;
     $scope.CurrentObjectDayState=$scope.CurrentObjectDay.attendance;
     $scope.CurrentSelectIdex=4;
+    $scope.EditTitle="出勤编辑";
     $scope.TaggleModel();
   }
   $scope.OpenSummaryEditInput=function(){
     $scope.CurrentObjectDayState=$scope.SummaryOrPlan.Summary;
     $scope.CurrentSelectIdex=5;
+    $scope.EditTitle="本周总结";
     $scope.TaggleModel();
   }
   $scope.OpenPlanEditInput=function(){
     $scope.CurrentObjectDayState=$scope.SummaryOrPlan.Plan;
     $scope.CurrentSelectIdex=6;
+    $scope.EditTitle="下周计划";
     $scope.TaggleModel();
   }
   $scope.CompleteEdit=function(){

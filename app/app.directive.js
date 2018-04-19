@@ -48,10 +48,22 @@ module.exports = angular.module('app.business').directive('appEditInput', ['$htt
     // templateUrl: './modules/business/template/Head1.html',
     template: require('./modules/business/template/Public/EditInput.html'),
         link: function($scope) {
-            // $scope.title="文档编辑";
+            // $scope.Edittitle="文档编辑2";
             $scope.ShowValue=function(){
                 console.log($scope.CurrentObjectDayState);
             };
+    }
+      };
+}]);
+
+'use strict';
+module.exports = angular.module('app.business').directive('appHospitalSelect', ['$http', function($http){
+  return {
+    restrict: 'A',
+    replace: true,
+    template: require('./modules/business/template/Public/HospitalSelect.html'),
+        link: function($scope) {
+            
     }
       };
 }]);

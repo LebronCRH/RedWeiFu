@@ -3,9 +3,9 @@
   	img{width:100%;height:100vh !important;}
   }
   .Weekly{
-        	width: 10rem;padding:0.2rem 0.3rem;box-sizing: border-box;
+        	width: 10rem;padding:0rem 0.3rem;box-sizing: border-box;
         .TopTitle{
-        	width:100%;height: 1rem;border-bottom: solid 1px rgba(0,0,0,0.1);display:flex;align-items: center;
+        	width:100%;height: 1.8rem;border-bottom: solid 1px rgba(0,0,0,0.1);display:flex;align-items: center;
         	span{line-height:1rem;font-size: 0.45rem;color:blcak;width: 1.4rem;color:#38dbb0;}
           button{
             border:none;padding:0rem;margin:0rem;background:none;line-height:1rem;font-size: 0.5rem;color:blcak;width: 1.4rem;
@@ -29,11 +29,22 @@
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
+    span{
+      font-size:0.2rem;
+    }
   }
   .gallery-thumbs {
       height: 1rem;position:relative;width: 8rem;overflow:auto;
   }
-  #nav{height: 1.2rem;}
+  #nav{height: 1.8rem;
+    .swiper-slide{
+      .DatItem{width:100%;height:50%;
+      .yuu{
+        font-size:0.3rem;margin:0rem;
+      }
+    }
+    }
+  }
   .projectItem{
       width:100%;list-style:none;padding: 0rem;margin: 0rem;
       .LiProjectItem{
@@ -98,9 +109,9 @@
                 }
       }
   }
-  .BigCharactSelect{width:10rem;position:absolute;left:0rem;top:1.1rem;background:#f2f3f4;height:12.7rem;z-index:99;width: 100%;
+  .BigCharactSelect{width:10rem;position:absolute;left:0rem;top:1.1rem;background:#f2f3f4;z-index:99;width: 100%;
     .CharactSelect{
-            width:10rem;background:#f2f3f4;height:11rem;z-index:99;overflow-y:auto;
+            width:10rem;background:#f2f3f4;z-index:99;overflow-y:auto;
             .CharacgTitle{
               width:10rem;height:0.8rem;line-height:0.8rem;font-size:0.38rem;margin:0rem;padding:0rem 0.3rem;box-sizing: border-box;
             }
@@ -161,6 +172,42 @@
       .Content{
         width:100%;line-height:0.8rem;font-size:0.4rem;height:.8rem;color:#000;
       }
+    }
+  }
+    .Topfixed{
+      position:fixed;left:0rem;top:1.5rem;background:#fff;border-bottom:solid 0.05px #f2f3f4;
+        .ps_serach{height:1.2rem;width:10rem;padding:0.1rem 0.1rem 0.1rem 0.1rem;background-color:#fff;
+            .ps_divserach{width:100%;height:1rem;border-radius:0.2rem;background-color:#f7f7ff;
+              img{height:1rem;width:1rem;float:right;padding:0.2rem;    box-sizing: border-box;}
+              input{width:8.8rem;height:1rem;padding:0rem;margin:0rem;float:left;border:none;color:#413d3d;background-color:#f7f7ff;border-right: solid 2px #fff;padding-left:0.3rem;}
+            }
+        }
+        .CharacgTitle{
+            width:10rem;height:0.8rem;line-height:0.8rem;font-size:0.38rem;margin:0rem;padding:0rem 0.3rem;box-sizing: border-box;
+        }
+    }
+  .SonHospitalSelect{
+    width:10rem;background:#f2f3f4;z-index:99;position:relative;margin-top:2rem;
+    .Topfixed{
+      position:fixed;left:0rem;top:0rem;background:#fff;
+        .ps_serach{height:1.2rem;width:10rem;padding:0.1rem 0.1rem 0.1rem 0.1rem;background-color:#fff;
+            .ps_divserach{width:100%;height:1rem;border-radius:0.2rem;background-color:#f7f7ff;
+              img{height:1rem;width:1rem;float:right;padding:0.2rem;    box-sizing: border-box;}
+              input{width:8.3rem;height:1rem;padding:0rem;margin:0rem;float:left;border:none;color:#e0e0e0;background-color:#f7f7ff;border-right: solid 2px #fff;}
+            }
+        }
+        .CharacgTitle{
+            width:10rem;height:0.8rem;line-height:0.8rem;font-size:0.38rem;margin:0rem;padding:0rem 0.3rem;box-sizing: border-box;
+        }
+    }
+    .ul_Discount{
+        width:10rem;background:#fff;list-style:none;padding:0rem 0.3rem;box-sizing: border-box;
+        .DiscountItem{
+          width:100%;height:1.1rem;display:flex;align-items:center;border-bottom:solid 0.05px #f2f3f4;
+          .ItemImg{width:0.55rem;height:0.55rem;}
+          .ItemContent{width:8rem;padding-left:0.3rem;color:#878686;font-size: 0.35rem;}
+          .ItemYes{width:0.4rem;height:0.4rem;}
+        }
     }
   }
 //需求跟踪首页面结束
@@ -239,7 +286,9 @@
         top: 0;
         opacity: 0;
     }
-    .Bottom{position:absolute;left:0rem;bottom: 0.3rem;right: 0rem;
+    .Bottom{
+      // position:absolute;left:0rem;bottom: 0.3rem;right: 0rem;
+      width:100%;margin-top:0.5rem;
       .SelectEdit{width:100%;display:flex;align-items:center;justify-content:space-around;background:#fff;border-top:solid 0.05px #f2f3f4;
         .EditClear{width:50%;height:1.2rem;border:solid 0.05px #ddd;line-height:1.2rem;text-align:center;color:#878686;border-radius:0.1rem;font-size: 0.4rem;}
         .EditSubmit{ 
@@ -310,13 +359,55 @@
       }
     }
     .PageTitle{
-      width:100%;height:1.45rem;display:flex;align-items:center;
+      width:100%;height:1.5rem;display:flex;align-items:center;
       p{
-        font-size:0.857rem;color:white;
+        font-size:0.865rem;color:white;
       }
     }
+    // .BigIput{
+    //   width:100%;margin-top:0.4rem;
+    //   .InputItem{
+    //     width:100%;height:2rem;padding:0rem;margin:0rem;border-bottom:solid 2px #61bfab;display:flex;align-items:center;
+    //     input.Top{
+    //       width:70%;height:100%;border:none;padding:0rem;margin:0rem;color:white;font-size:0.7rem;background:none;padding-left:0.2rem;
+    //     }
+    //     input.Bottom{
+    //       width:50%;height:100%;border:none;padding:0rem;margin:0rem;color:white;font-size:0.7rem;background:none;padding-left:0.2rem;
+    //     }
+    //     input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { /* WebKit*/  
+    //         color:    #61bfab;  
+    //     }  
+    //     input:-moz-placeholder, textarea:-moz-placeholder { /* Mozilla Firefox 4 to 18 */  
+    //         color:    #61bfab;  
+    //     }  
+    //     input::-moz-placeholder, textarea::-moz-placeholder { /* Mozilla Firefox 19+ */  
+    //         color:    #61bfab;  
+    //     }  
+    //     input:-ms-input-placeholder, textarea:-ms-input-placeholder { /* IE 10+ */  
+    //         color:    #61bfab;  
+    //     }  
+    //     .Right.Top{
+    //       width:30%;height:100%;
+    //       .Btn{
+    //         width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+    //         span{
+    //           color:#71c2b1;font-size:0.5rem;
+    //         }
+    //       }
+    //     }
+    //     .Right.Bottom{
+    //       width:50%;height:100%;display:flex;align-items:center;justify-content:center;
+    //       #v_container{
+    //         width:80%;height:80%;
+    //         canvas{
+    //           width:100%;height:100%;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
     .BigIput{
-      width:100%;margin-top:0.4rem;
+      width:100%;margin-top:0rem;
       .InputItem{
         width:100%;height:2rem;padding:0rem;margin:0rem;border-bottom:solid 2px #61bfab;display:flex;align-items:center;
         input.Top{
@@ -357,6 +448,7 @@
         }
       }
     }
+
     .BigEdit{
       width:100%;height:1.5rem;display:flex;align-items:center;justify-content:space-between;margin-top:1rem;
       .EditItem{
@@ -366,6 +458,14 @@
         }
       }
     }
+
+    .LoginBtn{
+      width:100%;height:1.4rem;background-color:rgba(255,255,255,0.6);border-radius:0.2rem;display:flex;align-items:center;justify-content:center;margin-top:3rem;
+          span{
+            color:#019a61;font-size:0.55rem;
+          }
+    }
+
     .NextPage{
       width:100%;height:1.4rem;position:fixed;left:0rem;bottom:0.2rem;padding:0rem 0.4rem;display:flex;justify-content:space-between;
       .Left{

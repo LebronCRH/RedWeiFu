@@ -1,5 +1,5 @@
 'use strict';
-module.exports = angular.module('app.business').controller('LoginCtrl', ['$state', '$http', '$scope','$cookieStore','UserLoginService', function($state, $http, $scope,$cookieStore,UserLoginService){
+module.exports = angular.module('app.business').controller('LoginCtrl', ['$state', '$http', '$scope','$cookieStore','$ionicLoading','$timeout','UserLoginService', function($state, $http, $scope,$cookieStore,$ionicLoading,$timeout,UserLoginService){
 	console.log(UserLoginService.userLogin);
 	$scope.PasswordState=true;
 	$scope.UserName="";
@@ -27,6 +27,7 @@ module.exports = angular.module('app.business').controller('LoginCtrl', ['$state
 		  // 		alert("请输入正确的员工号和密码！");
 		  // 	}
 		  // });
+		  $ionicLoading.show();
 		  UserLoginService.userLogin($scope.UserName,$scope.UserPassword).then(resp=>{
 		  	if(resp!=null){
 		  		sessionStorage.setItem("UserInfo",resp);
