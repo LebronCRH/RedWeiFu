@@ -1,6 +1,6 @@
 'use strict';
 module.exports = angular.module('app.business').controller('demandCtrl', ['$state', '$http', '$scope','$cookieStore','$ionicLoading','$timeout','DemandService', function($state, $http, $scope,$cookieStore,$ionicLoading,$timeout,DemandService){
-  $scope.title="需求预览";
+  $scope.title="需求跟踪";
   $scope.SonTitle="医院选择";
   $scope.Sonmodal=false;
   $scope.SourceList=["全部","实施工程师","销售","部门经理","研发工程师","公司领导","用户"];
@@ -12,8 +12,8 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
     StarTime:GetMonDate(),//起始时间
     EndTime:GetSunDate(),//截止时间
   };
-  $scope.StarTime="2018-04-09";//起始时间
-  $scope.EndTime="2018-04-16";//截止时间
+  // $scope.StarTime="2018-04-09";//起始时间
+  // $scope.EndTime="2018-04-16";//截止时间
   $scope.SelectHosital="";//医院的选择
   $scope.SelectZDR="";//指导人的输入
   $scope.SelectStatus=[];//状态的选择;
@@ -37,6 +37,12 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
   $('#dateSelectorEnd').mdater({ 
     // minDate : new Date(2015, 2, 10) 
   });
+  $scope.DateSelectOk=function(){//用来统一时间选择确认后外部JS调用Aangular内部函数用的
+    console.log("确认选择");
+  };
+  $scope.DateSelectCancel=function(){//用来统一时间选择取消后外部JS调用Aangular内部函数用的
+    console.log("取消选择");
+  };
   $ionicLoading.show({
     content: 'Loading',
     animation: 'fade-in',
@@ -52,11 +58,17 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
     day=d.getDay(),
     date=d.getDate();
     if(day==1)
-    return d;
+    {
+      console.log("不变");
+    }
     if(day==0)
-    d.setDate(date-6);
+    {
+      d.setDate(date-6);
+    }
     else
-    d.setDate(date-day+1);
+    {
+      d.setDate(date-day+1);
+    }
     var returnDate=GetDayString(d);
     return returnDate;
   };
@@ -66,11 +78,17 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
     day=d.getDay(),
     date=d.getDate();
     if(day==0)
-    return d;
+    {
+      console.log("不变");
+    }
     if(day==1)
-    d.setDate(date+6);
+    {
+      d.setDate(date+6);
+    }
     else
-    d.setDate(date+7-day);
+    {
+      d.setDate(date+7-day);
+    }
     var returnDate=GetDayString(d);
     return returnDate;
   };
@@ -85,10 +103,11 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
           days = "0" + days;
       }
       var ndate = years+"-"+month+"-"+days;
+      console.log(ndate);
       return ndate;
   };
-  console.log(GetMonDate());
-  console.log(GetSunDate());
+  // console.log(GetMonDate());
+  // console.log(GetSunDate());
   $scope.$watch('Data',function(now,old){
     console.log("老"+old);
     console.log("新"+now);
@@ -128,6 +147,10 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
       $scope.SelectSource=index;
     }
   };
+  $scope.ClearSource=function()
+  {
+    $scope.SelectSource=0;
+  };
   $scope.ChangeArea=function(index)//地区选择的操作函数
   {
     if($scope.SelectArea==index)
@@ -138,6 +161,9 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
     {
       $scope.SelectArea=index;
     }
+  };
+  $scope.ClearArea=function(){
+    $scope.SelectArea=null;
   };
   $scope.IsArray=function(value)//用户状态选择来判断是否显示高亮样式的函数
   {
@@ -175,6 +201,14 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
         }
       }
     console.log($scope.SelectStatus);
+  };
+  $scope.ClearAll=function(){
+    $scope.SelectStatus=[];
+    $scope.CurrentSelectHospital=null;//当前勾选的医院项
+    $scope.PrivSelectHospital=null;//记录上一次勾选的医院项
+    $scope.SerachHospital="";
+    console.log($scope.SelectZDR);
+    $scope.SelectZDR="";
   };
   $scope.ChangeHospital=function(Item)
   {
@@ -254,12 +288,20 @@ module.exports = angular.module('app.business').controller('demandCtrl', ['$stat
 }]);
 
 'use strict';
-module.exports = angular.module('app.business').controller('addDemandCtrl', ['$state', '$http', '$scope','$cookieStore','DemandService', function($state, $http, $scope,$cookieStore,DemandService){
+module.exports = angular.module('app.business').controller('addDemandCtrl', ['$state', '$http', '$scope','$cookieStore','$ionicLoading','$timeout','DemandService', function($state, $http, $scope,$cookieStore,$ionicLoading,$timeout,DemandService){
   $scope.title="添加需求";
+  $scope.SonTitle="医院选择";
+  $scope.SonExecutorTitle="人员选择";
+  $scope.Sonmodal=false;//医院选择的子页面控制
+  $scope.SonExecutormodal=false;//员工选择的子页面控制
   $scope.SerachName="";
   $scope.ShowHositalModel=false;
   $scope.ShowExecutorModel=false;
   $scope.SelectHosital="";
+  $scope.CurrentSelectHospital=null;//当前勾选的医院项
+  $scope.PrivSelectHospital=null;//记录上一次勾选的医院项
+  $scope.CurrentSelectExecutor=null;//当前勾选的执行人项
+  $scope.PrivSelectExecutor=null;//记录上一次勾选的执行人项
   $scope.SelectExecutor="";
   $scope.Obj={
     DemandTitle:"",
@@ -276,8 +318,9 @@ module.exports = angular.module('app.business').controller('addDemandCtrl', ['$s
   $scope.DemandCreateTime=getNowFormatDate();
   // $http.get("http://localhost:8085/Demand/GetAllHospital").success(function(resp){
   DemandService.GetAllHospital().then(resp=>{
-    $scope.Hospital=resp.listUnit;
-    $scope.Executor=resp.listUser;
+    $scope.HospitalList=resp.listUnit;
+    $scope.ExecutorList=resp.listUser;
+    console.log(resp.listUser);
   });
   function getNowFormatDate() {
   　　var date = new Date();
@@ -299,6 +342,56 @@ module.exports = angular.module('app.business').controller('addDemandCtrl', ['$s
     $scope.ShowHositalModel=!$scope.ShowHositalModel;
     $scope.ModelZzhe=true;
   };
+  $scope.SonBack=function()//医院选择子页面后退返回
+  {
+    $scope.CurrentSelectHospital=$scope.PrivSelectHospital;
+    if($scope.CurrentSelectHospital!=null)
+    {
+      $scope.SelectHosital=$scope.CurrentSelectHospital.UnitName;
+    }else
+    {
+      $scope.SelectHosital="";
+    }
+    $scope.Sonmodal=!$scope.Sonmodal;
+  };
+  $scope.SonComplete=function()//医院选择子页面完成返回
+  {
+    $scope.PrivSelectHospital=$scope.CurrentSelectHospital;
+    if($scope.CurrentSelectHospital!=null)
+    {
+      console.log($scope.CurrentSelectHospital);
+      $scope.SelectHosital=$scope.CurrentSelectHospital.UnitName;
+    }else{
+      $scope.SelectHosital="";
+    }
+    $scope.Sonmodal=!$scope.Sonmodal;
+  };
+
+  $scope.SonExecutorBack=function()//执行人选择子页面后退返回
+  {
+    $scope.CurrentSelectExecutor=$scope.PrivSelectExecutor;
+    if($scope.CurrentSelectExecutor!=null)
+    {
+      $scope.SelectExecutor=$scope.CurrentSelectExecutor.UserName;
+    }else
+    {
+      $scope.SelectExecutor="";
+    }
+    $scope.SonExecutormodal=!$scope.SonExecutormodal;
+  };
+  $scope.SonExecutorComplete=function()//执行人选择子页面完成返回
+  {
+    $scope.PrivSelectExecutor=$scope.CurrentSelectExecutor;
+    if($scope.CurrentSelectExecutor!=null)
+    {
+      console.log($scope.CurrentSelectExecutor);
+      $scope.SelectExecutor=$scope.CurrentSelectExecutor.UserName;
+    }else{
+      $scope.SelectExecutor="";
+    }
+    $scope.SonExecutormodal=!$scope.SonExecutormodal;
+  };
+
   $scope.TaggleExecutor=function(){
     $scope.ShowExecutorModel=!$scope.ShowExecutorModel;
     $scope.ModelZzhe=true;
@@ -308,15 +401,45 @@ module.exports = angular.module('app.business').controller('addDemandCtrl', ['$s
     $scope.ShowHositalModel=false;
     $scope.ShowExecutorModel=false;
   };
-  $scope.HospitalChange=function(Item){
-    $scope.SelectHosital=Item.UnitName;
-    $scope.TaggleModel();
+  $scope.SontaggleModel=function(){
+    $scope.Sonmodal=!$scope.Sonmodal;
   };
-  $scope.ExecutorChange=function(Item){
-    $scope.SelectExecutor=Item.UserName;
-    $scope.TaggleModel();
+  $scope.SontaggleExecutorModel=function(){
+    $scope.SonExecutormodal=!$scope.SonExecutormodal;
   };
-  $scope.save = function() {    
+  // $scope.HospitalChange=function(Item){
+  //   $scope.SelectHosital=Item.UnitName;
+  //   $scope.TaggleModel();
+  // };
+  $scope.ChangeHospital=function(Item)//医院选择函数
+  {
+    if($scope.CurrentSelectHospital!=null && $scope.CurrentSelectHospital.Id==Item.Id)
+    {
+      $scope.CurrentSelectHospital=null;
+    }
+    else{
+      $scope.CurrentSelectHospital=Item;
+    }
+  };
+
+  // $scope.ExecutorChange=function(Item){
+  //   $scope.SelectExecutor=Item.UserName;
+  //   $scope.TaggleModel();
+  // };
+  // 
+  $scope.ChangeExecutor=function(Item)//执行人选择函数
+  {
+    if($scope.CurrentSelectExecutor!=null && $scope.CurrentSelectExecutor.UserID==Item.UserID)
+    {
+      $scope.CurrentSelectExecutor=null;
+    }
+    else{
+      $scope.CurrentSelectExecutor=Item;
+    }
+  };
+
+  $scope.save = function() {   
+        $ionicLoading.show(); 
         var fd = new FormData();
         var file = document.querySelector('input[type=file]').files[0];
         fd.append('logo', file); 
@@ -329,7 +452,7 @@ module.exports = angular.module('app.business').controller('addDemandCtrl', ['$s
         fd.append('DemandCreateTime',$scope.DemandCreateTime);
         $http({
               method:'POST',
-              url:"http://192.168.1.5:8085/Demand/AddDemandForm",
+              url:"http://www.radinfo.com.cn:8065/Demand/AddDemandForm",
               data: fd,
               headers: {'Content-Type':undefined},
               transformRequest: angular.identity 
@@ -370,8 +493,46 @@ module.exports = angular.module('app.business').controller('DemandDetailsCtrl', 
         maxWidth: 200,
         showDelay: 0
       });
+      $scope.FileUrl="无选择文件";
+      $scope.FileDownloadUrl="";
+      $scope.UrlFittle=function(url){
+        if(url!="")
+        {
+          var arr = url.split('/');
+          return arr[arr.length-1];
+        }
+        else
+        {
+          return "无选择文件";
+        }
+      };
+      $scope.FileFrom=function(url){
+        var arr = url.split('/');
+        if(arr[0]=="upload")
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      };
+      function FileEdit(url){
+        var arr = url.split('/');
+        if(arr[0]=="upload")
+        {
+          return "http://www.radinfo.com.cn:8011/admin/"+url;
+        }
+        else
+        {
+          return "http://192.168.1.5:8085/"+url;
+        }
+      };
       DemandService.GetDemandByID($state.params.id).then(response=>{
         $scope.Obj=response;
+        $scope.FileUrl=$scope.UrlFittle($scope.Obj.ReqAttach);
+        $scope.FileDownloadUrl=FileEdit($scope.Obj.ReqAttach);
+        console.log(response);
         $timeout(function () {
           $ionicLoading.hide();
         }, 1000);

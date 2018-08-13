@@ -29,8 +29,9 @@
         <div class="DemandFile DemandItem">
             <p class="Title">附件:</p>
             <div class="Content" style="display: flex;align-items: center;">
-            <a href="javascript:;" class="upload"><span id="FileName">选择文件</span>
-            <input class="change" id="SelectFile" type="file" multiple="multiple" />
+            <a ng-if="Obj.ReqAttach!=''" href={{FileDownloadUrl}} download="doc" class="upload"><span id="FileName">{{FileUrl}}</span>
+            </a>
+            <a ng-if="Obj.ReqAttach==''" class="upload"><span id="FileName">未选择附件</span>
             </a>
             </div> 
         </div>
@@ -71,7 +72,7 @@
             </div>
         </div>
     </div>
-
+<!-- 
     <div class="Bottom">
           <div class="SelectEdit">
                 <div class="EditClear">
@@ -81,7 +82,7 @@
                   确定
                 </div>
              </div>
-    </div>
+    </div> -->
 
 <!--     <div class="shadow" ng-show="ModelZzhe==true" ng-click="TaggleModel()" style="position: absolute;left: 0rem;right: 0rem;bottom:0rem;top:0rem;background-color: rgba(0, 0, 0, 0.7);"></div>
     <div class="HospitalSelect FourMenu SourceSelect" ng-show="ShowHositalModel">

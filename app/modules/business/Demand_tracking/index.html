@@ -28,8 +28,8 @@
                    </li>             
             </ul>
             <div class="SelectEdit">
-                  <div class="EditClear">
-                      清空
+                  <div class="EditClear" ng-click="ClearSource()">
+                      默认
                   </div>
                   <div class="EditSubmit" ng-click="SubmitSerach()">
                     确定
@@ -45,7 +45,7 @@
                    </li>             
             </ul>
             <div class="SelectEdit">
-                  <div class="EditClear">
+                  <div class="EditClear" ng-click="ClearArea()">
                       清空
                   </div>
                   <div class="EditSubmit" ng-click="SubmitSerach()">
@@ -70,10 +70,10 @@
                 </li>
             </ul>
             <div class="SelectEdit">
-                  <div class="EditClear">
+<!--                   <div class="EditClear">
                       清空
-                  </div>
-                  <div class="EditSubmit" ng-click="SubmitSerach()">
+                  </div> -->
+                  <div class="EditSubmitOne" ng-click="SubmitSerach()">
                     确定
                   </div>
             </div>
@@ -91,7 +91,7 @@
                 <li class="LiProjectItem">
                 <p class="Title">指定人</p>
                 <div class="Content">
-                <input type="text" class="textContent">
+                <input type="text" ng-model="SelectZDR" class="textContent">
                 </div>
                 </li>
                 <li class="LiProjectItem">
@@ -111,7 +111,7 @@
            </ul> -->
         </div>
         <div class="SelectEdit">
-              <div class="EditClear">
+              <div class="EditClear" ng-click="ClearAll()">
                   清空
               </div>
               <div class="EditSubmit" ng-click="SubmitSerach()">

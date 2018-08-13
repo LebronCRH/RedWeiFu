@@ -46,7 +46,7 @@
         </div>
         <div class="DemandHospital DemandItem">
             <p class="Title">医院:</p>
-            <div class="Content" ng-click="TaggleHospital()">
+            <div class="Content" ng-click="SontaggleModel()">
             <input type="text" disabled="display" ng-model="SelectHosital" placeholder="选择医院……">
             </div> 
             <div class="Right">
@@ -55,7 +55,7 @@
         </div>
         <div class="DemandExecutor DemandItem">
             <p class="Title">执行人:</p>
-            <div class="Content" ng-click="TaggleExecutor()">
+            <div class="Content" ng-click="SontaggleExecutorModel()">
             <input type="text" disabled="display" ng-model="SelectExecutor" placeholder="指定执行人……">
             </div> 
             <div class="Right">
@@ -85,7 +85,7 @@
     </div>
 
     <div class="shadow" ng-show="ModelZzhe==true" ng-click="TaggleModel()" style="position: absolute;left: 0rem;right: 0rem;bottom:0rem;top:0rem;background-color: rgba(0, 0, 0, 0.7);"></div>
-    <div class="HospitalSelect FourMenu SourceSelect" ng-show="ShowHositalModel">
+<!--     <div class="HospitalSelect FourMenu SourceSelect" ng-show="ShowHositalModel">
             <div class="ps_serach">
                <div class="ps_divserach">
                <input type="text" ng-model="SerachName" name="serachName">
@@ -93,13 +93,13 @@
                </div>
             </div>
             <ul>
-                 <li class="SortItem" ng-repeat="Item in Hospital |filter:SerachName" ng-click="HospitalChange(Item)">
+                 <li class="SortItem" ng-repeat="Item in HospitalList |filter:SerachName" ng-click="HospitalChange(Item)">
                     <span class="CurrentSort">{{Item.UnitName}}</span>
                     <img src="../../../images/yes.png" style="display:none;">
                  </li>             
              </ul>
-    </div>
-    <div class="ExecutorSelect FourMenu SourceSelect" ng-show="ShowExecutorModel">
+    </div> -->
+<!--     <div class="ExecutorSelect FourMenu SourceSelect" ng-show="ShowExecutorModel">
             <div class="ps_serach">
                <div class="ps_divserach">
                <input type="text" ng-model="SerachName" name="serachName">
@@ -112,8 +112,11 @@
                     <img src="../../../images/yes.png" style="display:none;">
                  </li>                
              </ul>
-    </div>
+    </div> -->
 </div>
 
 </ion-content>
+  <div app-hospital-select Sonmodal="Sonmodal" current-select-hospital="CurrentSelectHospital" HospitalList="HospitalList" sontaggle-model="SontaggleModel()" change-hospital="ChangeHospital()" son-back="SonBack()" son-complete="SonComplete()" son-title="SonTitle"></div>
+
+  <div app-executor-select Son-executormodal="SonExecutormodal" current-select-executor="CurrentSelectExecutor" ExecutorList="ExecutorList" sontaggle-executor-model="SontaggleExecutorModel()" change-executor="ChangeExecutor()" son-executor-back="SonExecutorBack()" son-executor-complete="SonExecutorComplete()" son-executor-title="SonExecutorTitle"></div>
 </ion-pane>

@@ -25,6 +25,9 @@ import fetch from '../config/fetch'
 	//提交用户的周总结和周计划
 	export const SaveSummaryAndPlan=(Obj)=>fetch('/WorkWeekly/SaveSummaryAndPlan',Obj,'POST')
 
+	//yoghurt提交一天周报和一个完整的总结和计划
+	export const SaveNoteAndSumAndPlan=(Obj)=>fetch('/WorkWeekly/SaveNoteAndSumAndPlan',Obj,'POST')
+
 	//获得一个需求的详情信息
 	export const GetDemandByID=(id)=>fetch('/Demand/GetDemandByID',{
 		id:id,

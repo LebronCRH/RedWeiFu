@@ -55,7 +55,7 @@ module.exports =(function($){
 				this.initListeners();
 			},
 			renderHTML : function(){
-				var $html = $('<div class="md_mask"></div><div class="md_panel"><div class="md_head"><div class="md_selectarea"><a class="md_prev change_year" href="javascript:void(0);">&lt;</a> <a class="md_headtext yeartag" href="javascript:void(0);"></a> <a class="md_next change_year" href="javascript:void(0);">&gt;</a></div><div class="md_selectarea"><a class="md_prev change_month" href="javascript:void(0);">&lt;</a> <a class="md_headtext monthtag" href="javascript:void(0);">月</a> <a class="md_next change_month" href="javascript:void(0);">&gt;</a></div></div><div class="md_body"><ul class="md_weekarea"><li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li></ul><ul class="md_datearea in"></ul></div><div class="md_foot"><a href="javascript:void(0);" class="md_ok">确定</a> <a href="javascript:void(0);" class="md_cancel">取消</a></div></div>');
+				var $html = $('<div class="md_mask"></div><div class="md_panel"><div class="md_head"><div class="md_selectarea"><a class="md_prev change_year" href="javascript:void(0);">&lt;</a> <a class="md_headtext yeartag" href="javascript:void(0);"></a> <a class="md_next change_year" href="javascript:void(0);">&gt;</a></div><div class="md_selectarea"><a class="md_prev change_month" href="javascript:void(0);">&lt;</a> <a class="md_headtext monthtag" href="javascript:void(0);">月</a> <a class="md_next change_month" href="javascript:void(0);">&gt;</a></div></div><div class="md_body"><ul class="md_weekarea"><li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li></ul><ul class="md_datearea in"></ul></div><div class="md_foot"><ul class="ul_edit"><li class="md_ok li_edit">确定</li><li class="md_cancel li_edit">取消</li></ul></div></div>');
 				if($('.md_mask').length==0){$(document.body).append($html);}
 				return $html;
 			},
@@ -66,7 +66,10 @@ module.exports =(function($){
 			_hidePanel : function(){
 				//$('.md_panel, .md_mask').removeClass('show');
 				$('.md_panel, .md_mask').remove();
-				$('.shadow2').hide();
+				// $('.shadow2').hide();
+				setTimeout(function(){
+					$('.shadow2').hide();
+				}, 100);
 			},
 			_changeMonth : function(add, checkDate){
 
@@ -306,9 +309,15 @@ module.exports =(function($){
 						}
 						_this.input.val(_this.value.year + '-' + monthValue + '-' + dateValue);
 						_this._hidePanel();
+						var appElement = document.querySelector('[ng-controller=AppCtrl]'); 
+						var $scope = angular.element(appElement).scope(); 
+						$scope.$$childTail.DateSelectOk();
 					},
 					'.md_cancel' : function(){
 						_this._hidePanel();
+						var appElement = document.querySelector('[ng-controller=AppCtrl]'); 
+						var $scope = angular.element(appElement).scope(); 
+						$scope.$$childTail.DateSelectCancel();
 					}
 				});
 			}

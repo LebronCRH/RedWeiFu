@@ -8,7 +8,7 @@
   <div class="TopTitle">
        <!-- <span id="dateShowBtn">日期</span> -->
        <button type="button" id="dateShowBtn">日期</button>
-       <input type="text" id="DataSelect" style="display:none;" name="">
+       <input type="text" ng-model="SelectDate" id="DataSelect" style="display:none;" name="">
     <div class="swiper-container" id="nav">
     <div class="swiper-wrapper">
 <!--       <div class="swiper-slide" ng-repeat="Item in Week">
@@ -60,7 +60,7 @@
       </div>
     </div>
   </div>
-  <span ng-click="SubmitData()">查询</span>
+<!--   <span ng-click="SubmitData()">查询</span> -->
   </div>
   <div class="swiper-container" id="page">
   <div class="swiper-wrapper">
@@ -99,9 +99,9 @@
               <input type="text" class="textContent" ng-model="Item.attendance" disabled="disabled">
               </div>
               </li>
-              <li class="LiProjectItem">
+<!--               <li class="LiProjectItem">
               <div class="Preservation" ng-click="SubmitWeeklyItem(Item)">保存</div>
-              </li>
+              </li> -->
             </ul>
           </div></div>
       </div>
@@ -139,7 +139,8 @@
               </li>
             </ul>
 
-            <div class="AllPreservation" ng-click="SubmitAllData()">保存</div>
+<!--             <div class="AllPreservation" ng-click="SubmitAllData()">保存</div> -->
+            <div class="AllPreservation" ng-click="SubmitAllData2()">保存</div>
 </div>
  <ion-infinite-scroll  
      ng-if="hasData"  

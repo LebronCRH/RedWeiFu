@@ -1,17 +1,19 @@
+<ion-pane>
+<ion-scroll scroll>
 <div class="BigBJ">
 	<div class="TopHead">
-	<img src="../../../images/back2.png" alt="">
+<!-- 	<img src="../../../images/back2.png" alt=""> -->
 	</div>
 	<div class="PageTitle">
 	<p>输入用户名和密码</p>
 	</div>
 	<div class="BigIput">
 		<div class="InputItem">
-		    <input type="text" class="UserName Top" ng-model="UserName" placeholder="输入用户名">
+		    <input type="text" class="UserName Top" ng-model="User.UserName" placeholder="输入用户名">
 		</div>
 		<div class="InputItem">
-			<input type="password" ng-show="PasswordState" ng-model="UserPassword" class="UserPassword Top" placeholder="输入密码">
-			<input type="text" ng-show="!PasswordState" ng-model="UserPassword" class="UserPassword Top" placeholder="输入密码">
+			<input type="password" ng-show="PasswordState" ng-model="User.UserPassword" class="UserPassword Top" placeholder="输入密码">
+			<input type="text" ng-show="!PasswordState" ng-model="User.UserPassword" class="UserPassword Top" placeholder="输入密码">
 			<div class="Right Top">
 			<div class="Btn">
 			<span ng-show="PasswordState" ng-click="TagglePassword()">显示</span>
@@ -20,7 +22,7 @@
 			</div>
 		</div>
 		<div class="InputItem">
-			<input type="text" class="UserYzm Bottom" maxlength="4" ng-model="UserYzm" placeholder="验证码">
+			<input type="text" class="UserYzm Bottom" maxlength="4" ng-model="User.UserYzm" placeholder="验证码">
 			<div class="Right Bottom">
 			<div id="v_container"></div>
 			</div>
@@ -30,6 +32,7 @@
 	    <div class="LoginBtn" ng-click="SubmitLogin()">
 	      <span>登录</span>
 	    </div>
+<!-- 	    <div style="width: 100%;height: 9rem;background:#fff"></div> -->
 
 <!-- 	<div class="NextPage">
 	    <div class="Left">
@@ -42,3 +45,5 @@
 	    </div>
     </div> -->
 </div>
+</ion-scroll>
+</ion-pane>

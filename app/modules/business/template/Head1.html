@@ -10,10 +10,10 @@
    </div>
    <div class="Menu2" ng-show="MenuShow">
      <ul class="ul_Menu">
-       <li class="MenuItem" ui-sref-active="select" ui-sref="Login">
+<!--        <li class="MenuItem" ui-sref-active="select" ui-sref="Login">
           <img src="../../../images/login.png" alt="">
           <span>登录页面</span>
-       </li>
+       </li> -->
        <li class="MenuItem" ui-sref-active="select" ui-sref="WorkWeekly">
           <img src="../../../images/ribao.png" alt="">
           <span>工作日报</span>
@@ -24,7 +24,11 @@
        </li>
        <li class="MenuItem" ui-sref-active="select" ui-sref="DemandTrack">
           <img src="../../../images/yulan.png" alt="">
-          <span>需求预览</span>
+          <span>需求跟踪</span>
+       </li>
+        <li class="MenuItem" ng-click="OutLogin()">
+          <img src="../../../images/login.png" alt="">
+          <span>注销用户</span>
        </li>
      </ul>
    </div>

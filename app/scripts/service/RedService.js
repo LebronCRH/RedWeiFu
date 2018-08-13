@@ -7,11 +7,12 @@ module.exports = angular.module('app.business').service("UserLoginService", ["$q
 
 'use strict';
 module.exports = angular.module('app.business').service("WeeklyService", ["$q", "$http", "$location", function ($q, $http, $location) {
-	const {GetWeeklyNotes,GetSummaryAndPlan,SaveNote,SaveSummaryAndPlan}=require('../../service/getdata.js');
+	const {GetWeeklyNotes,GetSummaryAndPlan,SaveNote,SaveSummaryAndPlan,SaveNoteAndSumAndPlan}=require('../../service/getdata.js');
     this.GetWeeklyNotes = GetWeeklyNotes;
     this.GetSummaryAndPlan=GetSummaryAndPlan;
     this.SaveNote=SaveNote;
     this.SaveSummaryAndPlan=SaveSummaryAndPlan;
+    this.SaveNoteAndSumAndPlan=SaveNoteAndSumAndPlan;
 }]);
 
 'use strict';

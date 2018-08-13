@@ -19,7 +19,7 @@ module.exports = angular.module('app.business')
     }]);
 
 'use strict';
-module.exports = angular.module('app.business').directive('appPageHead', ['$http', function($http){
+module.exports = angular.module('app.business').directive('appPageHead', ['$http','$state', function($http,$state){
   return {
     restrict: 'A',
     replace: true,
@@ -30,6 +30,12 @@ module.exports = angular.module('app.business').directive('appPageHead', ['$http
             $scope.ShowMenu=function(){
                 console.log("显示");
                 $scope.MenuShow=!$scope.MenuShow;
+            };
+            $scope.OutLogin=function(){
+                sessionStorage.removeItem("UserInfo");
+                sessionStorage.removeItem("UserLoginName");
+                sessionStorage.removeItem("UserName");
+                $state.go("Login");
             };
     }
       };
@@ -67,4 +73,17 @@ module.exports = angular.module('app.business').directive('appHospitalSelect', [
     }
       };
 }]);
+
+'use strict';
+module.exports = angular.module('app.business').directive('appExecutorSelect', ['$http', function($http){
+  return {
+    restrict: 'A',
+    replace: true,
+    template: require('./modules/business/template/Public/ExecutorSelect.html'),
+        link: function($scope) {
+            
+    }
+      };
+}]);
+
 
